@@ -84,6 +84,8 @@ is additionally handled as a known Vulkan version-encoding edge case
 `ROBODOJO_SKIP_DRIVER_CHECK=0` to disable this automatic workaround.
 See [Isaac Sim 5.1 driver compatibility](docs/ISAAC_SIM_5_1_DRIVER_COMPAT.md)
 for the diagnosis, controls, and validation evidence.
+For ephemeral containers, follow
+[Restoring RoboDojo in a new container](docs/CONTAINER_RESTORE.md).
 
 ## 🔌 Policy Integration
 

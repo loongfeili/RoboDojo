@@ -53,8 +53,8 @@ Options:
   --seed NUM          Eval seed / layout seed (default: 0)
   --policy-gpu ID     GPU id for policy server (default: 0)
   --env-gpu ID        GPU id for Isaac Sim client (default: 0)
-  --policy-env NAME   Policy conda env or uv env path (required)
-  --eval-env NAME     Simulator conda env (default: RoboDojo)
+  --policy-env NAME   Separate policy environment (conda, uv, or path; required)
+  --eval-env NAME     Simulator uv environment path (default: .venv)
   --policy-dir PATH   Policy directory containing eval.sh (required)
   -h, --help          Show this help
 

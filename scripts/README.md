@@ -8,6 +8,7 @@
 | [install.sh](install.sh) | Validate system tools, initialize submodules, and run `uv sync` |
 | [init_assets.sh](init_assets.sh) | Download minimal or full simulation assets to persistent storage |
 | [persist_uv_env.sh](persist_uv_env.sh) | Save/restore `.venv` and uv cache archives for ephemeral containers |
+| [persist_container_state.sh](persist_container_state.sh) | Archive source, submodules, driver libraries, uv state, and manifests |
 | [eval_policy.sh](eval_policy.sh) | Isaac Sim eval client (called by `robodojo.sh client` and XPolicyLab) |
 
 ## Typical eval flow
