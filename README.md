@@ -82,6 +82,8 @@ non-root library overlay from the matching installed files. Driver 535.261.x
 is additionally handled as a known Vulkan version-encoding edge case
 (261 wraps to 5 in the 8-bit minor field); set
 `ROBODOJO_SKIP_DRIVER_CHECK=0` to disable this automatic workaround.
+See [Isaac Sim 5.1 driver compatibility](docs/ISAAC_SIM_5_1_DRIVER_COMPAT.md)
+for the diagnosis, controls, and validation evidence.
 
 ## 🔌 Policy Integration
 
