@@ -80,13 +80,22 @@ run_tasks() {
 run_sim_smoke() {
   export OMNI_KIT_ACCEPT_EULA="${OMNI_KIT_ACCEPT_EULA:-Y}"
   export OMNI_KIT_ALLOW_ROOT="${OMNI_KIT_ALLOW_ROOT:-1}"
+  local driver_overlay
+  driver_overlay="$(bash "${ROOT_DIR}/scripts/internal/prepare_nvidia_driver_compat.sh")"
+  if [[ -n "${driver_overlay}" ]]; then
+    export LD_LIBRARY_PATH="${driver_overlay}${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+  fi
   local experience
   experience="$(
     uv run --project "${ROOT_DIR}" --no-sync python \
       "${ROOT_DIR}/scripts/internal/prepare_isaac_experience.py"
   )"
   set -- "$@" --experience "${experience}"
-  if [[ "${ROBODOJO_SKIP_DRIVER_CHECK:-0}" == "1" ]]; then
+  local skip_driver_check="${ROBODOJO_SKIP_DRIVER_CHECK:-auto}"
+  if [[ "${skip_driver_check}" == "1" ]] || {
+    [[ "${skip_driver_check}" == "auto" ]] &&
+      bash "${ROOT_DIR}/scripts/internal/prepare_nvidia_driver_compat.sh" --needs-version-bypass
+  }; then
     set -- "$@" "--kit_args=--/rtx/verifyDriverVersion/enabled=false"
   fi
   uv run --project "${ROOT_DIR}" python "${ROOT_DIR}/scripts/internal/sim_smoke.py" "$@"

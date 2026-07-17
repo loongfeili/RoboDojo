@@ -6,6 +6,10 @@ PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 export PYTHONPATH="${PROJECT_ROOT}:${PROJECT_ROOT}/XPolicyLab:${PYTHONPATH:-}"
 echo "[INFO] PYTHONPATH=${PYTHONPATH}"
 PYTHON=(uv run --project "${PROJECT_ROOT}" --no-sync python)
+DRIVER_OVERLAY="$(bash "${PROJECT_ROOT}/scripts/internal/prepare_nvidia_driver_compat.sh")"
+if [[ -n "${DRIVER_OVERLAY}" ]]; then
+  export LD_LIBRARY_PATH="${DRIVER_OVERLAY}${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+fi
 
 # Usage:
 #   bash eval_policy.sh <task_name> <env_cfg_type> <device_id> <policy_name> <port> [extra-args...]
@@ -16,6 +20,8 @@ if [[ $# -lt 5 ]]; then
 fi
 
 root_dir=""
+dataset_name=""
+bench_name=""
 task_name=""
 env_cfg_type=""
 device_id=""
@@ -31,7 +37,7 @@ extra_args=()
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --root_dir|--task_name|--env_cfg_type|--device_id|--policy_name|--port|--eval_batch|--additional_info|--seed|--host|--protocol|--policy_server_url)
+    --root_dir|--dataset_name|--bench_name|--task_name|--env_cfg_type|--device_id|--policy_name|--port|--eval_batch|--additional_info|--seed|--host|--protocol|--policy_server_url)
       if [[ $# -lt 2 || "$2" == --* ]]; then
         echo "[ERROR] Missing value for argument: $1"
         exit 1
@@ -39,6 +45,8 @@ while [[ $# -gt 0 ]]; do
 
       case "$1" in
         --root_dir)    root_dir="$2" ;;
+        --dataset_name) dataset_name="$2" ;;
+        --bench_name) bench_name="$2" ;;
         --task_name)   task_name="$2" ;;
         --env_cfg_type)     env_cfg_type="$2" ;;
         --device_id)   device_id="$2" ;;
@@ -131,7 +139,11 @@ KIT_ARGS=""
 for ext in "${KIT_ENABLE_EXTS[@]}"; do
   KIT_ARGS+=" --enable ${ext}"
 done
-if [[ "${ROBODOJO_SKIP_DRIVER_CHECK:-0}" == "1" ]]; then
+skip_driver_check="${ROBODOJO_SKIP_DRIVER_CHECK:-auto}"
+if [[ "${skip_driver_check}" == "1" ]] || {
+  [[ "${skip_driver_check}" == "auto" ]] &&
+    bash "${PROJECT_ROOT}/scripts/internal/prepare_nvidia_driver_compat.sh" --needs-version-bypass
+}; then
   KIT_ARGS+=" --/rtx/verifyDriverVersion/enabled=false"
 fi
 if [[ -n "${ROBODOJO_KIT_ARGS:-}" ]]; then

@@ -76,6 +76,13 @@ bash scripts/robodojo.sh sim-smoke --enable_cameras
 policy checkpoints and training data are never included. Policy-specific
 environments remain independently managed by XPolicyLab.
 
+The launchers also detect container images whose `libcuda`, PTX JIT, or NVVM
+symlinks do not match the loaded NVIDIA kernel module. They create a local
+non-root library overlay from the matching installed files. Driver 535.261.x
+is additionally handled as a known Vulkan version-encoding edge case
+(261 wraps to 5 in the 8-bit minor field); set
+`ROBODOJO_SKIP_DRIVER_CHECK=0` to disable this automatic workaround.
+
 ## 🔌 Policy Integration
 
 Policies live in [XPolicyLab](https://github.com/XPolicyLab/XPolicyLab/blob/main/README.md), which owns policy structure, dependencies, checkpoint layout, and server behavior. RoboDojo only assumes a policy directory provides:

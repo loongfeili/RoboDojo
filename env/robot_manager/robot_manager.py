@@ -1,6 +1,7 @@
 from collections.abc import Sequence
 from copy import deepcopy
 from importlib import import_module
+import os
 from typing import List, Literal
 
 from isaaclab.assets.articulation import ArticulationCfg
@@ -43,12 +44,17 @@ class RobotManager:
         self.ik_solver = dict()
         self.robot_origin_endpose = None
         self.robot_init_joint = [dict() for _ in range(self.num_envs)]
+        disable_planner = os.environ.get("ROBODOJO_DISABLE_PLANNER", "0") == "1"
         for idx, cfg in enumerate(self.robots_cfg):
             if not cfg.get("coupled", False):
                 robot = self._get_robot(cfg, idx)
                 self.robot_list.append(robot)
                 self.use_scene_cfg.append(True)
-                if robot.robot_name not in self.planner and cfg.get("need_planner", True):
+                if (
+                    not disable_planner
+                    and robot.robot_name not in self.planner
+                    and cfg.get("need_planner", True)
+                ):
                     self._setup_planner(robot)
                 robot.type = cfg.get("type", "target")
                 self.target_arm_nums += 1 if robot.type == "target" else 0
@@ -58,9 +64,17 @@ class RobotManager:
                 self.use_scene_cfg.append(True)
                 self.robot_list.append(right_robot)
                 self.use_scene_cfg.append(False)
-                if left_robot.robot_name not in self.planner and cfg.get("need_planner", True):
+                if (
+                    not disable_planner
+                    and left_robot.robot_name not in self.planner
+                    and cfg.get("need_planner", True)
+                ):
                     self._setup_planner(left_robot)
-                if right_robot.robot_name not in self.planner and cfg.get("need_planner", True):
+                if (
+                    not disable_planner
+                    and right_robot.robot_name not in self.planner
+                    and cfg.get("need_planner", True)
+                ):
                     self._setup_planner(right_robot)
                 left_robot.type = cfg.get("type", "target")
                 right_robot.type = cfg.get("type", "target")
