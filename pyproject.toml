@@ -16,7 +16,8 @@ dependencies = [
     "isaaclab",
     "isaaclab-assets",
     "isaaclab-tasks",
-    "isaacsim[all,extscache]==5.1.0",
+    # Diagnostic fallback for hosts where the Isaac Sim 5.1 RTX path fails.
+    "isaacsim[all,extscache]==5.0.0",
     "matplotlib",
     "msgpack>=1.0.8",
     "msgpack-numpy>=0.4.8",
@@ -27,7 +28,7 @@ dependencies = [
     "open3d",
     "opencv-python-headless==4.11.0.86",
     "packaging==23.0",
-    "pillow==11.3.0",
+    "pillow==11.2.1",
     "psutil==5.9.8",
     "pydantic>=2.5",
     "pyyaml>=6",
@@ -68,6 +69,7 @@ prerelease = "allow"
 index-strategy = "unsafe-best-match"
 constraint-dependencies = ["warp-lang != 1.13.0.dev20260418"]
 override-dependencies = [
+    "pillow==11.2.1",
     "starlette==0.45.3",
     # isaacsim-core 5.1 metadata incorrectly requests pywin32 on Linux.
     "pywin32==306; sys_platform == 'win32'",

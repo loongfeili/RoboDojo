@@ -14,6 +14,7 @@ prerelease-mode = "allow"
 [manifest]
 constraints = [{ name = "warp-lang", specifier = "!=1.13.0.dev20260418" }]
 overrides = [
+    { name = "pillow", specifier = "==11.2.1" },
     { name = "pywin32", marker = "sys_platform == 'win32'", specifier = "==306" },
     { name = "starlette", specifier = "==0.45.3" },
 ]
@@ -34,42 +35,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/85/ef/fd7649da8af11d93979831e8f1f8097e85e82d5bfeabc8c68b39175d8e75/addict-2.4.0.tar.gz", hash = "sha256:b3b2210e0e067a281f5646c8c5db92e99b7231ea8b0eb5f74dbdf9e259d4e494", size = 9186, upload-time = "2020-11-21T16:21:31.416Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/6a/00/b08f23b7d7e1e14ce01419a467b583edbb93c6cdb8654e54a9cc579cd61f/addict-2.4.0-py3-none-any.whl", hash = "sha256:249bb56bbfd3cdc2a004ea0ff4c2b6ddc84d53bc2194761636eb314d5cfa5dfc", size = 3832, upload-time = "2020-11-21T16:21:29.588Z" },
-]
-
-[[package]]
-name = "aioboto3"
-version = "15.1.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "aiobotocore", extra = ["boto3"], marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "aiofiles", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/5c/b1/b0331786c50f6ef881f9a71c3441ccf7b64c7eed210297d882c37ce31713/aioboto3-15.1.0.tar.gz", hash = "sha256:37763bbc6321ceb479106dc63bc84c8fdb59dd02540034a12941aebef2057c5c", size = 234664, upload-time = "2025-08-14T19:49:15.35Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/93/b0/28e3ac89e7119b1cb4e6830664060b96a2b5761291e92a10fb3044b5a11d/aioboto3-15.1.0-py3-none-any.whl", hash = "sha256:66006142a2ccc7d6d07aa260ba291c4922b6767d270ba42f95c59e85d8b3e645", size = 35791, upload-time = "2025-08-14T19:49:14.14Z" },
-]
-
-[[package]]
-name = "aiobotocore"
-version = "2.24.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "aiohttp", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "aioitertools", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "botocore", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "jmespath", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "multidict", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "python-dateutil", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "wrapt", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/b2/ca/ac82c0c699815b6d5b4017f3d8fb2c2d49537f4937f4a0bdf58b4c75d321/aiobotocore-2.24.0.tar.gz", hash = "sha256:b32c0c45d38c22a18ce395a0b5448606c5260603296a152895b5bdb40ab3139d", size = 119597, upload-time = "2025-08-08T18:26:50.373Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e2/68/b29577197aa2e54b50d6f214524790cc1cb27d289585ad7c7bdfe5125285/aiobotocore-2.24.0-py3-none-any.whl", hash = "sha256:72bb1f8eb1b962779a95e1bcc9cf35bc33196ad763b622a40ae7fa9d2e95c87c", size = 84971, upload-time = "2025-08-08T18:26:48.777Z" },
-]
-
-[package.optional-dependencies]
-boto3 = [
-    { name = "boto3", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
 
 [[package]]
@@ -211,14 +176,14 @@ wheels = [
 
 [[package]]
 name = "awscrt"
-version = "0.23.8"
+version = "0.23.4"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/fe/50/0e3fd91488e5f0a18bc829869fc081cf4d9cd86642d9ee21b32907b02e80/awscrt-0.23.8.tar.gz", hash = "sha256:cba55f3ee80ea3192a0a24e84caad778570250800a59d29ef9efbcd4d1612f2f", size = 77078798, upload-time = "2025-01-28T00:56:12.185Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ff/ba/ff910e6c0f51eae21cd517b17bf0fc532230b72b2f759bd0482ac2f8706b/awscrt-0.23.4.tar.gz", hash = "sha256:3ef5212a3c3b0549b3b0e85507b7bbdfb891ff40ca4c597e92db07a0bf7b614a", size = 65405449, upload-time = "2024-12-06T19:37:34.951Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b0/7f/bd932351214640033c5b58ba1ab5682842f2643f686a58b7362f77fb598d/awscrt-0.23.8-cp311-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5a2bb5786bcce5bb568a53b89d7a8e87f847b2c939e587377344603a62314a04", size = 8732091, upload-time = "2025-01-28T00:54:51.786Z" },
-    { url = "https://files.pythonhosted.org/packages/f8/ac/f0edab94770ace1738593987ceb9b15d8e2e33519984b0857f588777f08c/awscrt-0.23.8-cp311-abi3-musllinux_1_1_x86_64.whl", hash = "sha256:2f03fabc8a3bf50ac2481c57b107d511079b94513ae507f706c715a77fa7b0a6", size = 8931145, upload-time = "2025-01-28T00:54:59.686Z" },
-    { url = "https://files.pythonhosted.org/packages/53/c5/c6d57e2a0d06b8e7b62e4221432a9d02eae2883062a3f77dd1d6217b6b52/awscrt-0.23.8-cp313-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ef00ee94d0dda9a940bbb19056ab0a2ef38f3a715004c6572a79bb045fcdd42a", size = 8728618, upload-time = "2025-01-28T00:55:10.063Z" },
-    { url = "https://files.pythonhosted.org/packages/9b/04/6b616a21a55e9ae4511fa4f4a7c7229976fbee3f8a6eb5dea9289e3c7e00/awscrt-0.23.8-cp313-abi3-musllinux_1_1_x86_64.whl", hash = "sha256:f352f6e3876a774aa9b99b0e5c879eba404026d85f99c407ac60b0413d508366", size = 8928257, upload-time = "2025-01-28T00:55:17.062Z" },
+    { url = "https://files.pythonhosted.org/packages/59/14/9c4a444aa3459607eb6be1c6d4270a0c02a6ac89f5b628f5bc78580b0284/awscrt-0.23.4-cp311-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3c1a3c20753d8b6bb37ec584518ef0addb37cde2f5caebbbc8ecfbb7846e8983", size = 8612488, upload-time = "2024-12-06T19:36:34.165Z" },
+    { url = "https://files.pythonhosted.org/packages/95/09/39ff6286b5a546a516496d7ccb85d2c696bd2fe77bcfd758c040b1e7846c/awscrt-0.23.4-cp311-abi3-musllinux_1_1_x86_64.whl", hash = "sha256:584f97bd3d2e8ec55e9862084aa7c59538c09dab245a5fa0af793a331fc94275", size = 8811296, upload-time = "2024-12-06T19:36:41.986Z" },
+    { url = "https://files.pythonhosted.org/packages/20/5d/421de95e44d1b7583c053edd9aec4c1267ea5627c4591f37a8ec4964e6b5/awscrt-0.23.4-cp313-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:fb3ad12008bb358b21ad021ef21a11c5960d871bb9aef95a5a639ce5548a54df", size = 8609183, upload-time = "2024-12-06T19:36:49.849Z" },
+    { url = "https://files.pythonhosted.org/packages/b5/b9/47b94b3ca05bd9a80a15530e817548928cd94aa8fbdf457f4651d49098f4/awscrt-0.23.4-cp313-abi3-musllinux_1_1_x86_64.whl", hash = "sha256:679f12dcf0e44a92819f421325261789f0d6b73f461026d27bd5dfbf5461a1d4", size = 8807862, upload-time = "2024-12-06T19:36:53.953Z" },
 ]
 
 [[package]]
@@ -277,30 +242,40 @@ wheels = [
 
 [[package]]
 name = "boto3"
-version = "1.39.11"
+version = "1.36.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "botocore", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "jmespath", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "s3transfer", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b6/2e/ed75ea3ee0fd1afacc3379bc2b7457c67a6b0f0e554e1f7ccbdbaed2351b/boto3-1.39.11.tar.gz", hash = "sha256:3027edf20642fe1d5f9dc50a420d0fe2733073ed6a9f0f047b60fe08c3682132", size = 111869, upload-time = "2025-07-22T19:26:50.867Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/bf/04/0c6cea060653eee75f4348152dfc0aa0b241f7d1f99a530079ee44d61e4b/boto3-1.36.1.tar.gz", hash = "sha256:258ab77225a81d3cf3029c9afe9920cd9dec317689dfadec6f6f0a23130bb60a", size = 110959, upload-time = "2025-01-16T20:33:00.196Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/72/66/88566a6484e746c0b075f7c9bb248e8548eda0a486de4460d150a41e2d57/boto3-1.39.11-py3-none-any.whl", hash = "sha256:af8f1dad35eceff7658fab43b39b0f55892b6e3dd12308733521cc24dd2c9a02", size = 139900, upload-time = "2025-07-22T19:26:48.706Z" },
+    { url = "https://files.pythonhosted.org/packages/2b/ed/464e1df3901fbfedd5a0786e551240216f0c867440fa6156595178227b3f/boto3-1.36.1-py3-none-any.whl", hash = "sha256:eb21380d73fec6645439c0d802210f72a0cdb3295b02953f246ff53f512faa8f", size = 139163, upload-time = "2025-01-16T20:32:57.462Z" },
+]
+
+[package.optional-dependencies]
+crt = [
+    { name = "botocore", extra = ["crt"], marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
 
 [[package]]
 name = "botocore"
-version = "1.39.11"
+version = "1.36.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jmespath", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "python-dateutil", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "urllib3", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6d/d0/9d64261186cff650fe63168441edb4f4cd33f085a74c0c54455630a71f91/botocore-1.39.11.tar.gz", hash = "sha256:953b12909d6799350e346ab038e55b6efe622c616f80aef74d7a6683ffdd972c", size = 14217749, upload-time = "2025-07-22T19:26:40.723Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/39/aa/556720b3ee9629b7c4366b5a0d9797a84e83a97f78435904cbb9bdc41939/botocore-1.36.1.tar.gz", hash = "sha256:f789a6f272b5b3d8f8756495019785e33868e5e00dd9662a3ee7959ac939bb12", size = 13498150, upload-time = "2025-01-16T20:32:35.989Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1c/2c/8a0b02d60a1dbbae7faa5af30484b016aa3023f9833dfc0d19b0b770dd6a/botocore-1.39.11-py3-none-any.whl", hash = "sha256:1545352931a8a186f3e977b1e1a4542d7d434796e274c3c62efd0210b5ea76dc", size = 13876276, upload-time = "2025-07-22T19:26:35.164Z" },
+    { url = "https://files.pythonhosted.org/packages/be/bb/5431f12e2dadd881fd023fb57e7e3ab82f7b697c38dc837fc8d70cca51bd/botocore-1.36.1-py3-none-any.whl", hash = "sha256:dec513b4eb8a847d79bbefdcdd07040ed9d44c20b0001136f0890a03d595705a", size = 13297686, upload-time = "2025-01-16T20:32:31.584Z" },
+]
+
+[package.optional-dependencies]
+crt = [
+    { name = "awscrt", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
 
 [[package]]
@@ -511,6 +486,12 @@ sdist = { url = "https://files.pythonhosted.org/packages/3f/0b/30328302903c55218
 wheels = [
     { url = "https://files.pythonhosted.org/packages/fe/19/3ba5e1b0bcc7b91aeab6c258afd70e4907d220fed3972febe38feb40db30/configargparse-1.7.5-py3-none-any.whl", hash = "sha256:1e63fdffedf94da9cd435fc13a1cd24777e76879dd2343912c1f871d4ac8c592", size = 27692, upload-time = "2026-03-11T02:19:36.442Z" },
 ]
+
+[[package]]
+name = "construct"
+version = "2.10.68"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/e0/b7/a4a032e94bcfdff481f2e6fecd472794d9da09f474a2185ed33b2c7cad64/construct-2.10.68.tar.gz", hash = "sha256:7b2a3fd8e5f597a5aa1d614c3bd516fa065db01704c72a1efaaeec6ef23d8b45", size = 57856, upload-time = "2022-02-21T23:09:15.1Z" }
 
 [[package]]
 name = "contourpy"
@@ -875,14 +856,14 @@ wheels = [
 
 [[package]]
 name = "gunicorn"
-version = "23.0.0"
+version = "22.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "packaging", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/34/72/9614c465dc206155d93eff0ca20d42e1e35afc533971379482de953521a4/gunicorn-23.0.0.tar.gz", hash = "sha256:f014447a0101dc57e294f6c18ca6b40227a4c90e9bdb586042628030cba004ec", size = 375031, upload-time = "2024-08-10T20:25:27.378Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1e/88/e2f93c5738a4c1f56a458fc7a5b1676fc31dcdbb182bef6b40a141c17d66/gunicorn-22.0.0.tar.gz", hash = "sha256:4a0b436239ff76fb33f11c07a16482c521a7e09c1ce3cc293c2330afe01bec63", size = 3639760, upload-time = "2024-04-16T22:58:19.218Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/cb/7d/6dac2a6e1eba33ee43f318edbed4ff29151a49b5d37f080aad1e6469bca4/gunicorn-23.0.0-py3-none-any.whl", hash = "sha256:ec400d38950de4dfd418cff8328b2c8faed0edb0d517d3394e457c317908ca4d", size = 85029, upload-time = "2024-08-10T20:25:24.996Z" },
+    { url = "https://files.pythonhosted.org/packages/29/97/6d610ae77b5633d24b69c2ff1ac3044e0e565ecbd1ec188f02c45073054c/gunicorn-22.0.0-py3-none-any.whl", hash = "sha256:350679f91b24062c86e386e198a15438d53a7a8207235a78ba1b53df4c4378d9", size = 84443, upload-time = "2024-04-16T22:58:15.233Z" },
 ]
 
 [[package]]
@@ -1185,13 +1166,13 @@ requires-dist = [
 
 [[package]]
 name = "isaacsim"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.nvidia.com/" }
 dependencies = [
     { name = "isaacsim-kernel", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
 wheels = [
-    { url = "https://pypi.nvidia.cn/isaacsim/isaacsim-5.1.0.0-cp311-none-manylinux_2_35_x86_64.whl", hash = "sha256:ad2c027831ed5d4a62552735bb799dea4e4604530d2ab9b526ddb6cd19a98c11" },
+    { url = "https://pypi.nvidia.cn/isaacsim/isaacsim-5.0.0.0-cp311-none-manylinux_2_35_x86_64.whl", hash = "sha256:85751ff84d137ccb3d0bd5031a38fd904d6a76e77f72ead63e0ca9620819e15d" },
 ]
 
 [package.optional-dependencies]
@@ -1225,54 +1206,52 @@ extscache = [
 
 [[package]]
 name = "isaacsim-app"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-kernel", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/72/e8/01a55a3328d8c0d5bd40f21833262dd0fb383a25fccbc6c5e2aecea525e2/isaacsim_app-5.1.0.0.tar.gz", hash = "sha256:dd78828e21c6a38e6a8b71857f259ac244a301f6e468f3ae4e660479dcfed0c9", size = 854, upload-time = "2025-10-21T19:11:30.994Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f4/a3/34ac67fb12e0e3f87759f3474078220edea747990f9c431e66d294b7abdd/isaacsim_app-5.0.0.0.tar.gz", hash = "sha256:cd1df6a04295f462a6727e4971298c35f3aa392e727508d51211eb2f6a8cd599", size = 858, upload-time = "2025-08-07T02:11:32.282Z" }
 
 [[package]]
 name = "isaacsim-asset"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-storage", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "isaacsim-utils", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e7/62/edaeb7f77d6b72436d2825576c6b6d36f1fdbfccba297e1cd3ddc388e0ee/isaacsim_asset-5.1.0.0.tar.gz", hash = "sha256:52f9698ddd25c8f7c07632cf56616d7f1c77eb8e830e8f7f2ac1d71b494cb3e3", size = 876, upload-time = "2025-10-21T19:10:30.876Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/15/3c/f4192485a5c985184becbb1381e7639dbdabd361d0118943f83252b218a6/isaacsim_asset-5.0.0.0.tar.gz", hash = "sha256:201b8ca012ea095ede0493c0624856f1a515268e06acf2080a12e3732f3986bc", size = 880, upload-time = "2025-08-07T02:10:29.007Z" }
 
 [[package]]
 name = "isaacsim-benchmark"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-robot", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5c/27/e31720196d0a1b5dbc6e099669e264f67d12bde0580d90391fd8bf2a5ed1/isaacsim_benchmark-5.1.0.0.tar.gz", hash = "sha256:5f71c9f574ac959e6581033d66283261da507a19ad5772a814140f01f691cba8", size = 856, upload-time = "2025-10-21T19:05:27.374Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1f/22/67764603e835f1e4ddd3aa87aa126914cb40c9aa3f467584bded0663d884/isaacsim_benchmark-5.0.0.0.tar.gz", hash = "sha256:ae425f1d9c42966c80189e18b05c2267b505c8a34d7398abf4ba3be6dccf78f6", size = 863, upload-time = "2025-08-07T02:07:10.326Z" }
 
 [[package]]
 name = "isaacsim-code-editor"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-kernel", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/40/c0/53c230d4656a80b06b8461db059e64cd0ec94a09727e0dd94d6fcaa181ba/isaacsim_code_editor-5.1.0.0.tar.gz", hash = "sha256:671c40484850d8fdce92ebaf96323068e594be268fb3e319a133a18e4dee9be2", size = 874, upload-time = "2025-10-21T18:57:38.001Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/3c/4c/1e787ce1b16f627b32a344b2822ccb57b7f5f3cd47541c4240746024f0cc/isaacsim_code_editor-5.0.0.0.tar.gz", hash = "sha256:ceb71f79456357b7639c01e323da4a2c816facd937643cef047df4000344335e", size = 877, upload-time = "2025-08-07T01:59:52.5Z" }
 
 [[package]]
 name = "isaacsim-core"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "aioboto3", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "aiobotocore", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "awscrt", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "azure-core", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "azure-identity", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "azure-storage-blob", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "boto3", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "boto3", extra = ["crt"], marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "botocore", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "construct", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "contourpy", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "cryptography", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "cycler", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
@@ -1294,21 +1273,26 @@ dependencies = [
     { name = "nest-asyncio", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "networkx", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "numba", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "numpy-quaternion", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "nvsmi", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "oauthlib", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "opencv-python-headless", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "osqp", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "packaging", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "pint", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "plotly", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "portalocker", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "pyparsing", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "pyperclip", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "python-dateutil", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "pyyaml", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "qdldl", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "requests", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "requests-oauthlib", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "rtree", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "s3transfer", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "scipy", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "selenium", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "six", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "sympy", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "torch", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
@@ -1316,58 +1300,59 @@ dependencies = [
     { name = "torchvision", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "tornado", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "trimesh", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "webbot", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/01/0c/820f069568cfc9ddf672dd5b0df22ffff69c563c74fea8f93b4da5ec36cc/isaacsim_core-5.1.0.0.tar.gz", hash = "sha256:d5df4781f91a0d14caf452b64a02d4b32897ef8e7f6d45af79e833682f268a2b", size = 1384, upload-time = "2025-10-21T19:13:27.532Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/cf/e3/4704d5689dbe58bf9c0a79ec0561af3c02ecb9450a7c9e2392c1b7048896/isaacsim_core-5.0.0.0.tar.gz", hash = "sha256:701fe7f41de4f2ff24dcec14edb840302b816c0a2c8171912bef82c800e8e7e7", size = 1422, upload-time = "2025-08-07T02:13:26.128Z" }
 
 [[package]]
 name = "isaacsim-cortex"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-robot", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "isaacsim-ros1", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b4/96/ed4749956f44e3325a8b223a78001e1240ac00854bab3ea7bea8c94fd19f/isaacsim_cortex-5.1.0.0.tar.gz", hash = "sha256:69b352bab7c3271bff8c4369e8a244ed7cf50d0eed14da1a05d225d4ed30ffeb", size = 899, upload-time = "2025-10-21T19:12:31.372Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d3/c0/a417ad0c3838602e31b119d197a4ef0e115de4ca72cf38ac9eb7fd6518c0/isaacsim_cortex-5.0.0.0.tar.gz", hash = "sha256:f9287568a60d909a4344dd6ce1bd9cfb637d578f6a65127aa58baa87a2c0a61c", size = 900, upload-time = "2025-08-07T02:12:32.779Z" }
 
 [[package]]
 name = "isaacsim-example"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-cortex", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f0/98/c1d35dff070eb301c127427cd812b31f4a63fc90c3f91d4e249d7b56ac01/isaacsim_example-5.1.0.0.tar.gz", hash = "sha256:01d52e04de6f37abe21ac22e340514b0591058c39847063dee2d7fc539a27631", size = 845, upload-time = "2025-10-21T18:59:36.223Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6e/8b/d5e08f851415052af3bff0a259e2899a480d6be79fbbdb29bfc60388839c/isaacsim_example-5.0.0.0.tar.gz", hash = "sha256:7c611282a45ac301d30ed11d8835407187b877a13cea3521d526697359c9790d", size = 849, upload-time = "2025-08-07T02:04:19.902Z" }
 
 [[package]]
 name = "isaacsim-extscache-kit"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/c0/62/b33d3efa0413732cd280cccb4f3987db199d660861e8f4b00992f25f303d/isaacsim_extscache_kit-5.1.0.0.tar.gz", hash = "sha256:ebe44f6feeae140e8ac4f732984804bea97349d4b52aaed15cbd185375b9acc3", size = 856, upload-time = "2025-10-21T19:09:38.051Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b0/b4/e8f1973fb4747c3e30fb1c7491415cab25c5f2ebd27919f7ec2e53941c46/isaacsim_extscache_kit-5.0.0.0.tar.gz", hash = "sha256:41836ac644b6fa1bee2a0ca47d1647bcb8fed24701c933ed92d83c7cc22f0772", size = 862, upload-time = "2025-08-07T02:10:18.973Z" }
 
 [[package]]
 name = "isaacsim-extscache-kit-sdk"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/1a/c1/cee445ee49982f203d1f12fd2448f5fd80909bd4c720828457b9ec9d3d08/isaacsim_extscache_kit_sdk-5.1.0.0.tar.gz", hash = "sha256:25a3f3569820e297491dd92325771c340b451d9980bd588f723bf64bd4adf0f8", size = 870, upload-time = "2025-10-21T19:02:06.646Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/af/68/289d0430dd0323ecd70197499c78827c0f68020def437f93bb0c9aa3e1af/isaacsim_extscache_kit_sdk-5.0.0.0.tar.gz", hash = "sha256:928fa7529a7173b944e49397af47cdc4730a4368c3940bb04a0a101377d818f7", size = 873, upload-time = "2025-08-07T02:05:23.538Z" }
 
 [[package]]
 name = "isaacsim-extscache-physics"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/d4/23/d256e2cecffaba1cb63b3909683d9202fb070f4dad8c7151bde83e7cf0f5/isaacsim_extscache_physics-5.1.0.0.tar.gz", hash = "sha256:39f87ec7491869ef75dee81ca4fd1c160a14baa06dda094152549a980267f672", size = 864, upload-time = "2025-10-21T18:54:28.139Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/33/2a/b5c82d007d5931e88bf35bffd61e60dc0ead0fc156bdc321b61e15830782/isaacsim_extscache_physics-5.0.0.0.tar.gz", hash = "sha256:f050c48183659fcd66f73467a92b45109627e38e5c9a9a92623a9f8cf51dd29d", size = 868, upload-time = "2025-08-07T02:14:28.072Z" }
 
 [[package]]
 name = "isaacsim-gui"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-core", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/83/49/2c2561fc26bf165323e6fc493ce35b3e80734d8f77172eda908d5e005120/isaacsim_gui-5.1.0.0.tar.gz", hash = "sha256:c2debcc920d64486dc34cd9aecc1c438fc231e649953bb1f7a03d9f624bf11b3", size = 866, upload-time = "2025-10-21T18:57:31.892Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/aa/60/d158ea6003e369eae673904d63af1acbe75c8f8639bb94e13592f9a18e54/isaacsim_gui-5.0.0.0.tar.gz", hash = "sha256:d912bfe1268a11595a421e52c75b390107133e1cc474d7b18a54e998368e8aeb", size = 869, upload-time = "2025-08-07T01:58:17.897Z" }
 
 [[package]]
 name = "isaacsim-kernel"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiodns", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
@@ -1390,6 +1375,7 @@ dependencies = [
     { name = "jinja2", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "multidict", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "numpy", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "omniverse-kit", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "pillow", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "propcache", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "psutil", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
@@ -1397,7 +1383,6 @@ dependencies = [
     { name = "python-multipart", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "pytz", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "qrcode", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "requests", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "sentry-sdk", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "toml", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "typing-extensions", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
@@ -1407,121 +1392,121 @@ dependencies = [
     { name = "wrapt", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "yarl", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/06/a8/cac3a25ef034dad263660a9f3e52c03fe6dd89d2a50b0943a770ee0a05ca/isaacsim_kernel-5.1.0.0.tar.gz", hash = "sha256:052107c4650d5b7c9cb3d06fe3fbbfb5522c05e5b1882b06aacf8d8d6de109da", size = 1221, upload-time = "2025-10-21T19:08:04.938Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/71/bd/27e8ca161f3019194d2db931ac57e99f6bc7e6b1346513012b2897b7a7e0/isaacsim_kernel-5.0.0.0.tar.gz", hash = "sha256:b76053f9ada630e369c56c1d5f2d192a92f817fadff34c26b677450ea1a61e3d", size = 1230, upload-time = "2025-08-07T02:07:32.408Z" }
 
 [[package]]
 name = "isaacsim-replicator"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-core", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "isaacsim-storage", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/78/85/9bd0e40c4ec49ccfcd22a6d7232b175da128d68f513632d0577c3be4e4ff/isaacsim_replicator-5.1.0.0.tar.gz", hash = "sha256:ffc08d6ce07c38801afafc9ad2599447f43535022f48fd18e39f66505e83aab1", size = 912, upload-time = "2025-10-21T19:07:36.84Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/fb/97/275e0fe592c9a9d813370e8e334b5e8abc81e77e87ea2727123d6393c775/isaacsim_replicator-5.0.0.0.tar.gz", hash = "sha256:581f2724d6bcd4b95e3b81d7f19c1ba5db1706fe1525f61dd0a46734565c83d0", size = 914, upload-time = "2025-08-07T02:07:34.63Z" }
 
 [[package]]
 name = "isaacsim-rl"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-benchmark", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "isaacsim-robot", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/4f/67/39602a6ea302d8136ec73719e3e38862dbe8dd26ec7fd82a82ff2540f85f/isaacsim_rl-5.1.0.0.tar.gz", hash = "sha256:817416596c05ff7aa0630020cf9562c1d92495e71041b0a9825b07966af4d6fa", size = 861, upload-time = "2025-10-21T19:08:30.657Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d6/88/d5ab8370905fadbbc975b4dc53b4c31a54ddade89f51cd64034aa2202c3f/isaacsim_rl-5.0.0.0.tar.gz", hash = "sha256:ea81ad5231c5f3f820760e41eef5cd17d417427952c28c293f021212b0369fc6", size = 866, upload-time = "2025-08-07T02:09:54.943Z" }
 
 [[package]]
 name = "isaacsim-robot"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-robot-motion", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "isaacsim-sensor", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/48/57/d6643eff3b9374b60dd21cf960e786c1ea6673bf6b6dec4b5a90154b33f9/isaacsim_robot-5.1.0.0.tar.gz", hash = "sha256:c7f252a6e49e92dd2399079a1baf2e2514b51f8dca0e8dac746ff53d2b1fbf6f", size = 863, upload-time = "2025-10-21T19:00:09.534Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/12/5d/b2287b9cb623ef66f4068cd82752bf3e65341bcd192599b7eea6d29374da/isaacsim_robot-5.0.0.0.tar.gz", hash = "sha256:be282d68878f1d02b66e042fcf243b2b250f1d722aadaa84e9459edc275d5d24", size = 867, upload-time = "2025-08-07T02:04:21.399Z" }
 
 [[package]]
 name = "isaacsim-robot-motion"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-gui", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2b/da/532d83b43accafba4d81b03e828523d9d3fd33c9c41c2b33470ca9b38cf0/isaacsim_robot_motion-5.1.0.0.tar.gz", hash = "sha256:485d6ce61e4144f4fb6708f1214c6c30e754abb554ba23d91346a8c144cc0a80", size = 886, upload-time = "2025-10-21T19:03:40.385Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/87/6e/a5d4f1f6e3c9aeb816e6385ae8f242faef2d6773dbe0da77f03400ea4898/isaacsim_robot_motion-5.0.0.0.tar.gz", hash = "sha256:f1b70aad34f9b921a6159258231f01c78c9fe371cc9e116fe6182297b54e48e3", size = 889, upload-time = "2025-08-07T02:05:24.695Z" }
 
 [[package]]
 name = "isaacsim-robot-setup"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-robot-motion", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b7/01/9e4266ac12b81e662695eaff76644fe5efba7170bc9e2527cda08703a875/isaacsim_robot_setup-5.1.0.0.tar.gz", hash = "sha256:4524a2ad97050701a58a09d15bb2ce20c3c6dc7891ddcbd119aa15c02e250e80", size = 867, upload-time = "2025-10-21T18:56:28.276Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1d/b2/c3530e1921d187bd0ded14da9324c3299139f4fe5f47f000f193313448d4/isaacsim_robot_setup-5.0.0.0.tar.gz", hash = "sha256:7a70392ce9a1413b745e6fffa6f1547bf1a6c99edf28eb75c231778dcdae1268", size = 871, upload-time = "2025-08-07T01:57:22.287Z" }
 
 [[package]]
 name = "isaacsim-ros1"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-sensor", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ee/77/3d566e3b8a1fb0a5ff1d2e06565de28637324b8d6946fd17e3be792b9603/isaacsim_ros1-5.1.0.0.tar.gz", hash = "sha256:f4a77169edec69b24eccd812a0f7356683eae92ebf36a6aa9a178b2fc2c03d83", size = 863, upload-time = "2025-10-21T18:58:32.498Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/28/0f/4771d7c469b7f268f07f9052f94029d13faec7b1e92fbaaa96d86b0d861a/isaacsim_ros1-5.0.0.0.tar.gz", hash = "sha256:064a6d5858f06e70d9d2b88b76cefc1d3b9c69898bb7810d6434e1a96530cbbb", size = 868, upload-time = "2025-08-07T02:02:44.841Z" }
 
 [[package]]
 name = "isaacsim-ros2"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-sensor", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/12/fc/5a7de2e10c886745e0ede325ecf05bc1204cd9c7275cb9a42147ab4c86d5/isaacsim_ros2-5.1.0.0.tar.gz", hash = "sha256:8189a27eb03bbdf22e1e28ad8da61febc8af83c5f787f6948088559b57278ee1", size = 863, upload-time = "2025-10-21T18:58:26.866Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e0/2b/d6c985760cde7f9017e9b5987fb3381cf1494cc8c6251c54eb4642131f8d/isaacsim_ros2-5.0.0.0.tar.gz", hash = "sha256:060502e1a6fdc7513602f28f5d96b6fb2bb5a6a3dda0122588f30da40025dad3", size = 867, upload-time = "2025-08-07T02:01:21.255Z" }
 
 [[package]]
 name = "isaacsim-sensor"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-gui", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "isaacsim-storage", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "isaacsim-utils", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0c/7e/5b68498e5ef5781ae6ccc4b6cd9de0f1bd3f4d50085aa3fa9b3d3857a07b/isaacsim_sensor-5.1.0.0.tar.gz", hash = "sha256:d4cf795a44b6132a07b61d0f3ffe0efbd594387251f434feea6984bf48d9cb58", size = 870, upload-time = "2025-10-21T18:55:31.758Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c4/53/1de6be4b05d9a7914cc107d335ad8d77f2e5a02efa4044e40275f0704fb0/isaacsim_sensor-5.0.0.0.tar.gz", hash = "sha256:0100e78ea55f98e2a1eda3d5d76ddea1743006dde835e5843c624aa9471d7516", size = 875, upload-time = "2025-08-07T02:16:32.14Z" }
 
 [[package]]
 name = "isaacsim-storage"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-kernel", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/79/95/dde4f5deef653ebf4049af861579d031bf531abf4f863ae6284b4814a245/isaacsim_storage-5.1.0.0.tar.gz", hash = "sha256:c6e829ae90ad94e1a93690dbee25ff1d02c5ebf08f78b404a986e54e6c8c46b5", size = 856, upload-time = "2025-10-21T19:12:49.007Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/34/45/a5deee39c2ef06a2204ef243c8bdb31930c470dff30ca8a7400f2fc75e4a/isaacsim_storage-5.0.0.0.tar.gz", hash = "sha256:9039deb82b537a94f56fbca6aad257b63fa0d37cd968307da81148ae1ade7ec7", size = 861, upload-time = "2025-08-07T02:12:28.436Z" }
 
 [[package]]
 name = "isaacsim-template"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-gui", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "isaacsim-storage", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/90/dd/3550686f96f826fe1ada9b6d273ab6b16b9efc2e9dbc3ed3db49faaa1c67/isaacsim_template-5.1.0.0.tar.gz", hash = "sha256:2faa8386ae089f299bd1159067a2ee3c34574bddaacd54853b6bcbb6531bab21", size = 851, upload-time = "2025-10-21T19:03:50.397Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a8/1c/82fd7dcd8373b54c8f3672377bc36266978fca6c4461b15aad32d69aa41f/isaacsim_template-5.0.0.0.tar.gz", hash = "sha256:db63ca72d2dab1fa87ebe85db8a1b43be61fffc1a86a608e9e0d900d214d84c9", size = 854, upload-time = "2025-08-07T02:05:23.148Z" }
 
 [[package]]
 name = "isaacsim-test"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-robot", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0b/0b/0effa5aeb7c3a8323a96c5511c22ac9f074447739e4f72e16b3f3258490c/isaacsim_test-5.1.0.0.tar.gz", hash = "sha256:1083f9920adbd634362a81d9dbdb1a9ad76268f005ea9d8c325e74357a1bff12", size = 850, upload-time = "2025-10-21T19:02:11.627Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b3/0c/4c74847d0c4fb33118e99c79e297abc76ef1ba2f1de09bbea4237bbeb9ad/isaacsim_test-5.0.0.0.tar.gz", hash = "sha256:b6d6eb6120952dcab0b67014f8a42d14d795badc576fe8858cc41a2776beee08", size = 855, upload-time = "2025-08-07T02:05:15.055Z" }
 
 [[package]]
 name = "isaacsim-utils"
-version = "5.1.0.0"
+version = "5.0.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "isaacsim-gui", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d0/dc/e49055e3ac7161b4064a3453cf667571b3a743c15895ac26960985b973fa/isaacsim_utils-5.1.0.0.tar.gz", hash = "sha256:90d555e4261bc3305c58ab5799308c1a099604dba69b6b49a59a112c2c44d941", size = 842, upload-time = "2025-10-21T18:58:33.32Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/9f/26/609dc39118193653cab5810ae8d8e953efd603f7b887e681eb98c0d205d8/isaacsim_utils-5.0.0.0.tar.gz", hash = "sha256:e620959a0eb58eb4235152d82c1fc2f18d90e6efd835826555e73f2b00681121", size = 845, upload-time = "2025-08-07T02:02:48.267Z" }
 
 [[package]]
 name = "isodate"
@@ -1755,7 +1740,7 @@ wheels = [
 
 [[package]]
 name = "matplotlib"
-version = "3.10.3"
+version = "3.10.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "contourpy", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
@@ -1768,10 +1753,10 @@ dependencies = [
     { name = "pyparsing", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "python-dateutil", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/26/91/d49359a21893183ed2a5b6c76bec40e0b1dcbf8ca148f864d134897cfc75/matplotlib-3.10.3.tar.gz", hash = "sha256:2f82d2c5bb7ae93aaaa4cd42aca65d76ce6376f83304fa3a630b569aca274df0", size = 34799811, upload-time = "2025-05-08T19:10:54.39Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/68/dd/fa2e1a45fce2d09f4aea3cee169760e672c8262325aa5796c49d543dc7e6/matplotlib-3.10.0.tar.gz", hash = "sha256:b886d02a581b96704c9d1ffe55709e49b4d2d52709ccebc4be42db856e511278", size = 36686418, upload-time = "2024-12-14T06:32:51.547Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e7/e3/c82963a3b86d6e6d5874cbeaa390166458a7f1961bab9feb14d3d1a10f02/matplotlib-3.10.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:fdfa07c0ec58035242bc8b2c8aae37037c9a886370eef6850703d7583e19964b", size = 8606464, upload-time = "2025-05-08T19:09:59.471Z" },
-    { url = "https://files.pythonhosted.org/packages/0e/34/24da1027e7fcdd9e82da3194c470143c551852757a4b473a09a012f5b945/matplotlib-3.10.3-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:c0b9849a17bce080a16ebcb80a7b714b5677d0ec32161a2cc0a8e5a6030ae220", size = 9413103, upload-time = "2025-05-08T19:10:03.208Z" },
+    { url = "https://files.pythonhosted.org/packages/b2/7d/2d873209536b9ee17340754118a2a17988bc18981b5b56e6715ee07373ac/matplotlib-3.10.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5439f4c5a3e2e8eab18e2f8c3ef929772fd5641876db71f08127eed95ab64683", size = 8599369, upload-time = "2024-12-14T06:31:14.677Z" },
+    { url = "https://files.pythonhosted.org/packages/b8/03/57d6cbbe85c61fe4cbb7c94b54dce443d68c21961830833a1f34d056e5ea/matplotlib-3.10.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:4673ff67a36152c48ddeaf1135e74ce0d4bce1bbf836ae40ed39c29edf7e2765", size = 9405992, upload-time = "2024-12-14T06:31:18.871Z" },
 ]
 
 [[package]]
@@ -2205,6 +2190,15 @@ wheels = [
 ]
 
 [[package]]
+name = "nvsmi"
+version = "0.4.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/9d/13/c5da04d29f4e5f830a8558601b3e179163d0d94e0da06529d5a8e62eed9e/nvsmi-0.4.2.tar.gz", hash = "sha256:c1a391c7c4dadc6ec572909ff0372451d464ebadc144e5aa5fbbcc893dcb7bfa", size = 5248, upload-time = "2020-02-28T09:32:05.357Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d2/d5/6ec6d6410b434463ba76900d2363a1f75c474f3442a4365557b2588fa14b/nvsmi-0.4.2-py3-none-any.whl", hash = "sha256:718894c24bdf7b58b8ecdfd282dceb06ef120a4b4e0b8517193cba876174945e", size = 5466, upload-time = "2020-02-28T09:32:03.88Z" },
+]
+
+[[package]]
 name = "oauthlib"
 version = "3.2.2"
 source = { registry = "https://pypi.org/simple" }
@@ -2224,6 +2218,12 @@ sdist = { url = "https://files.pythonhosted.org/packages/26/bf/5de71e337d1747d1b
 wheels = [
     { url = "https://files.pythonhosted.org/packages/6c/ac/9770aa7460f40c87036b8045fed672344805463d955095462e218b3b2d4c/omegaconf-2.4.0.dev12-py3-none-any.whl", hash = "sha256:6baf8e5cc60156b1d2ae9f682270dc727466135d55cabd38208e6e21ec010a6d", size = 234340, upload-time = "2026-06-27T17:46:41.263Z" },
 ]
+
+[[package]]
+name = "omniverse-kit"
+version = "107.3.1.206797"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/79/e8/5479f65f3384df19bb5c977385bb012c783e36bef6e741257c25c53b8e9e/omniverse_kit-107.3.1.206797.tar.gz", hash = "sha256:57aece816cb2bde043b9937dbd5c2c151833a4a311b1ffe9d423c35294e5c403", size = 1988, upload-time = "2025-08-07T17:33:31.903Z" }
 
 [[package]]
 name = "onnx"
@@ -2292,6 +2292,18 @@ wheels = [
 ]
 
 [[package]]
+name = "outcome"
+version = "1.3.0.post0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "attrs", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/98/df/77698abfac98571e65ffeb0c1fba8ffd692ab8458d617a0eed7d9a8d38f2/outcome-1.3.0.post0.tar.gz", hash = "sha256:9dcf02e65f2971b80047b377468e72a268e15c0af3cf1238e6ff14f7f91143b8", size = 21060, upload-time = "2023-10-26T04:26:04.361Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/55/8b/5ab7257531a5d830fc8000c476e63c935488d74609b50f9384a643ec0a62/outcome-1.3.0.post0-py2.py3-none-any.whl", hash = "sha256:e771c5ce06d1415e356078d3bdd68523f284b4ce5419828922b6871e65eda82b", size = 10692, upload-time = "2023-10-26T04:26:02.532Z" },
+]
+
+[[package]]
 name = "packaging"
 version = "23.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2337,15 +2349,15 @@ wheels = [
 
 [[package]]
 name = "pillow"
-version = "11.3.0"
+version = "11.2.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/f3/0d/d0d6dea55cd152ce3d6767bb38a8fc10e33796ba4ba210cbab9354b6d238/pillow-11.3.0.tar.gz", hash = "sha256:3828ee7586cd0b2091b6209e5ad53e20d0649bbe87164a459d0676e035e8f523", size = 47113069, upload-time = "2025-07-01T09:16:30.666Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/af/cb/bb5c01fcd2a69335b86c22142b2bccfc3464087efb7fd382eee5ffc7fdf7/pillow-11.2.1.tar.gz", hash = "sha256:a64dd61998416367b7ef979b73d3a85853ba9bec4c2925f74e588879a58716b6", size = 47026707, upload-time = "2025-04-12T17:50:03.289Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/13/92/dcdd147ab02daf405387f0218dcf792dc6dd5b14d2573d40b4caeef01059/pillow-11.3.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:91da1d88226663594e3f6b4b8c3c8d85bd504117d043740a8e0ec449087cc494", size = 7641168, upload-time = "2025-07-03T13:10:00.37Z" },
-    { url = "https://files.pythonhosted.org/packages/f2/2f/d7675ecae6c43e9f12aa8d58b6012683b20b6edfbdac7abcb4e6af7a3784/pillow-11.3.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:106064daa23a745510dabce1d84f29137a37224831d88eb4ce94bb187b1d7e5f", size = 6640273, upload-time = "2025-07-01T09:14:06.235Z" },
-    { url = "https://files.pythonhosted.org/packages/3a/04/ba8f2b11fc80d2dd462d7abec16351b45ec99cbbaea4387648a44190351a/pillow-11.3.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:932c754c2d51ad2b2271fd01c3d121daaa35e27efae2a616f77bf164bc0b3e94", size = 6715516, upload-time = "2025-07-01T09:14:10.233Z" },
-    { url = "https://files.pythonhosted.org/packages/de/5f/c22340acd61cef960130585bbe2120e2fd8434c214802f07e8c03596b17e/pillow-11.3.0-pp311-pypy311_pp73-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:465b9e8844e3c3519a983d58b80be3f668e2a7a5db97f2784e7079fbc9f9822c", size = 6583963, upload-time = "2025-07-03T13:11:26.283Z" },
-    { url = "https://files.pythonhosted.org/packages/cc/2d/e082982aacc927fc2cab48e1e731bdb1643a1406acace8bed0900a61464e/pillow-11.3.0-pp311-pypy311_pp73-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:504b6f59505f08ae014f724b6207ff6222662aab5cc9542577fb084ed0676ac7", size = 5581505, upload-time = "2025-07-01T09:16:25.593Z" },
+    { url = "https://files.pythonhosted.org/packages/1f/e3/0a58b5d838687f40891fff9cbaf8669f90c96b64dc8f91f87894413856c6/pillow-11.2.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b93a07e76d13bff9444f1a029e0af2964e654bfc2e2c2d46bfd080df5ad5f3d8", size = 4498006, upload-time = "2025-04-12T17:47:42.912Z" },
+    { url = "https://files.pythonhosted.org/packages/20/f2/805ad600fc59ebe4f1ba6129cd3a75fb0da126975c8579b8f57abeb61e80/pillow-11.2.1-cp311-cp311-manylinux_2_28_x86_64.whl", hash = "sha256:8f4f3724c068be008c08257207210c138d5f3731af6c155a81c2b09a9eb3a788", size = 4607069, upload-time = "2025-04-12T17:47:46.46Z" },
+    { url = "https://files.pythonhosted.org/packages/62/ae/f29c705a09cbc9e2a456590816e5c234382ae5d32584f451c3eb41a62062/pillow-11.2.1-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:f6b0c664ccb879109ee3ca702a9272d877f4fcd21e5eb63c26422fd6e415365e", size = 4661304, upload-time = "2025-04-12T17:47:51.067Z" },
+    { url = "https://files.pythonhosted.org/packages/9d/8f/abd47b73c60712f88e9eda32baced7bfc3e9bd6a7619bb64b93acff28c3e/pillow-11.2.1-pp311-pypy311_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9db98ab6565c69082ec9b0d4e40dd9f6181dab0dd236d26f7a50b8b9bfbd5076", size = 3460013, upload-time = "2025-04-12T17:49:53.278Z" },
+    { url = "https://files.pythonhosted.org/packages/58/0e/2abab98a72202d91146abc839e10c14f7cf36166f12838ea0c4db3ca6ecb/pillow-11.2.1-pp311-pypy311_pp73-manylinux_2_28_x86_64.whl", hash = "sha256:14f73f7c291279bd65fda51ee87affd7c1e097709f7fdd0188957a16c264601f", size = 3571586, upload-time = "2025-04-12T17:49:57.171Z" },
 ]
 
 [[package]]
@@ -2531,15 +2543,15 @@ wheels = [
 
 [[package]]
 name = "pycares"
-version = "4.8.0"
+version = "4.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cffi", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/19/7a/01ef7ce35fc1312d6c1c07f3b87f329ad6daf41bb9cd57c8f017e0b653fa/pycares-4.8.0.tar.gz", hash = "sha256:2fc2ebfab960f654b3e3cf08a732486950da99393a657f8b44618ad3ed2d39c1", size = 647980, upload-time = "2025-05-04T11:27:24.282Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/01/50/e3015e6e03a3cf64113f509e8b86b71af37169b59ccedfcb182f3d031329/pycares-4.3.0.tar.gz", hash = "sha256:c542696f6dac978e9d99192384745a65f80a7d9450501151e4a7563e06010d45", size = 821580, upload-time = "2022-12-10T21:53:09.071Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/31/72/158a2c1f456b3674490db1788769f17fbf6d6b4481c46e7687485518bce0/pycares-4.8.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:63511af7a3f9663f562fbb6bfa3591a259505d976e2aba1fa2da13dde43c6ca7", size = 626177, upload-time = "2025-05-04T11:26:23.617Z" },
-    { url = "https://files.pythonhosted.org/packages/a2/50/5114822c348347c46b01ccaac5dd81f791d93e984ec8f7f653e312e28590/pycares-4.8.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:ce8b1a16c1e4517a82a0ebd7664783a327166a3764d844cf96b1fb7b9dd1e493", size = 625979, upload-time = "2025-05-04T11:26:30.28Z" },
+    { url = "https://files.pythonhosted.org/packages/45/d4/af668b05b39383a1d697946a3f752811c71622fb5496f35d0a049d0e3e0f/pycares-4.3.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2c9335175af0c64a1e0ba67bdd349eb62d4eea0ad02c235ccdf0d535fd20f323", size = 288731, upload-time = "2022-12-10T21:52:19.268Z" },
+    { url = "https://files.pythonhosted.org/packages/4a/37/40f5d5a1301b71cce15299780565794803511f020af868ebe5a562bcae2f/pycares-4.3.0-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:3215445396c74103e2054e6b349d9e85883ceda2006d0039fc2d58c9b11818a2", size = 282134, upload-time = "2022-12-10T21:52:24.974Z" },
 ]
 
 [[package]]
@@ -2669,6 +2681,15 @@ wheels = [
 ]
 
 [[package]]
+name = "pysocks"
+version = "1.7.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/bd/11/293dd436aea955d45fc4e8a35b6ae7270f5b8e00b53cf6c024c83b657a11/PySocks-1.7.1.tar.gz", hash = "sha256:3f8804571ebe159c380ac6de37643bb4685970655d3bba243530d6558b799aa0", size = 284429, upload-time = "2019-09-20T02:07:35.714Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8d/59/b4572118e098ac8e46e399a1dd0f2d85403ce8bbaad9ec79373ed6badaf9/PySocks-1.7.1-py3-none-any.whl", hash = "sha256:2725bd0a9925919b9b51739eea5f9e2bae91e83288108a9ad338b2e3a4435ee5", size = 16725, upload-time = "2019-09-20T02:06:22.938Z" },
+]
+
+[[package]]
 name = "pytest"
 version = "9.1.1"
 source = { registry = "https://pypi.org/simple" }
@@ -2752,15 +2773,15 @@ wheels = [
 
 [[package]]
 name = "qdldl"
-version = "0.1.7.post5"
+version = "0.1.7.post1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "scipy", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/59/88/9254835c513a381b8c6d52773060844acf76dfa739648c18f61809c8ee04/qdldl-0.1.7.post5.tar.gz", hash = "sha256:0b1399e1c49b5bed5aac8fd63ef08ab708d340c37fb426fe00128bc1f36b286e", size = 73920, upload-time = "2025-01-02T17:40:44.586Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/71/68/90b11b620c43589153ea744a01bd451ccb3328639e15e2de6dc79b45ebd7/qdldl-0.1.7.post1.tar.gz", hash = "sha256:798d88c16e02536ae65c71f06b64e3fbf31b74d7e47bc10ff9816768632b3a64", size = 70992, upload-time = "2024-04-05T10:15:51.415Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b8/7e/5fe5a081bd229a2b703a4b93e5ecaf44f51902e9b6a645c8ce4ea325ec0d/qdldl-0.1.7.post5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c34872867c2bcac60279034594eac8dee042b9dedd4c45948e55884b8c5c9cd0", size = 1193311, upload-time = "2025-01-02T17:39:51.174Z" },
+    { url = "https://files.pythonhosted.org/packages/7b/86/972916fc493525aa931d890f25e1d62d5796c3aee31905e750222e76e747/qdldl-0.1.7.post1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:59f5949df82e9b4a543047c510d895cddd8ff2887450d256c660a109e4652df9", size = 1147727, upload-time = "2024-04-05T10:15:43.598Z" },
 ]
 
 [[package]]
@@ -2938,7 +2959,7 @@ requires-dist = [
     { name = "isaaclab", editable = "third_party/IsaacLab/source/isaaclab" },
     { name = "isaaclab-assets", editable = "third_party/IsaacLab/source/isaaclab_assets" },
     { name = "isaaclab-tasks", editable = "third_party/IsaacLab/source/isaaclab_tasks" },
-    { name = "isaacsim", extras = ["all", "extscache"], specifier = "==5.1.0", index = "https://pypi.nvidia.com/" },
+    { name = "isaacsim", extras = ["all", "extscache"], specifier = "==5.0.0", index = "https://pypi.nvidia.com/" },
     { name = "matplotlib" },
     { name = "msgpack", specifier = ">=1.0.8" },
     { name = "msgpack-numpy", specifier = ">=0.4.8" },
@@ -2949,7 +2970,7 @@ requires-dist = [
     { name = "open3d" },
     { name = "opencv-python-headless", specifier = "==4.11.0.86" },
     { name = "packaging", specifier = "==23.0" },
-    { name = "pillow", specifier = "==11.3.0" },
+    { name = "pillow", specifier = "==11.2.1" },
     { name = "psutil", specifier = "==5.9.8" },
     { name = "pydantic", specifier = ">=2.5" },
     { name = "pyyaml", specifier = ">=6" },
@@ -3010,14 +3031,14 @@ wheels = [
 
 [[package]]
 name = "s3transfer"
-version = "0.13.1"
+version = "0.11.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "botocore", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6d/05/d52bf1e65044b4e5e27d4e63e8d1579dbdec54fce685908ae09bc3720030/s3transfer-0.13.1.tar.gz", hash = "sha256:c3fdba22ba1bd367922f27ec8032d6a1cf5f10c934fb5d68cf60fd5a23d936cf", size = 150589, upload-time = "2025-07-18T19:22:42.31Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/82/e0/5f98a2974fa8c041848ff1acb657b50546ea1505fc1f50e3424120cee557/s3transfer-0.11.0.tar.gz", hash = "sha256:6563eda054c33bdebef7cbf309488634651c47270d828e594d151cd289fb7cf7", size = 146986, upload-time = "2025-01-15T21:37:25.63Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6d/4f/d073e09df851cfa251ef7840007d04db3293a0482ce607d2b993926089be/s3transfer-0.13.1-py3-none-any.whl", hash = "sha256:a981aa7429be23fe6dfc13e80e4020057cbab622b08c0315288758d67cabc724", size = 85308, upload-time = "2025-07-18T19:22:40.947Z" },
+    { url = "https://files.pythonhosted.org/packages/19/74/940311734dfbe36bf06ed86e4c367c8fb2b137448762c4724142180411fb/s3transfer-0.11.0-py3-none-any.whl", hash = "sha256:f43b03931c198743569bbfb6a328a53f4b2b4ec723cd7c01fab68e3119db3f8b", size = 84113, upload-time = "2025-01-15T21:37:23.22Z" },
 ]
 
 [[package]]
@@ -3080,16 +3101,31 @@ wheels = [
 ]
 
 [[package]]
+name = "selenium"
+version = "4.14.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "certifi", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "trio", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "trio-websocket", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "urllib3", extra = ["socks"], marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0b/9a/7d71270c718d5f509cecda822f8c3ff39b2696fc8036f16b5d9b541b7940/selenium-4.14.0.tar.gz", hash = "sha256:0d14b0d9842366f38fb5f8f842cf7c042bcfa062affc6a0a86e4d634bdd0fe54", size = 9710348, upload-time = "2023-10-10T03:25:03.924Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fc/df/a8972c41279fc9e9404cad87bc1f4d6d3d824b84c5c072dca0e986a89680/selenium-4.14.0-py3-none-any.whl", hash = "sha256:be9824a9354a7fe288e3fad9ceb6a9c65ddc7c44545d23ad0ebf4ce202b19893", size = 9926718, upload-time = "2023-10-10T03:24:59.726Z" },
+]
+
+[[package]]
 name = "sentry-sdk"
-version = "2.29.1"
+version = "1.43.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "certifi", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "urllib3", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/22/67/d552a5f8e5a6a56b2feea6529e2d8ccd54349084c84176d5a1f7295044bc/sentry_sdk-2.29.1.tar.gz", hash = "sha256:8d4a0206b95fa5fe85e5e7517ed662e3888374bdc342c00e435e10e6d831aa6d", size = 325518, upload-time = "2025-05-19T14:27:38.512Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/49/bc/09bb95b030ecc46b5eb15d1c27d8275849986d0025cec6d7ce5cc3603c93/sentry-sdk-1.43.0.tar.gz", hash = "sha256:41df73af89d22921d8733714fb0fc5586c3461907e06688e6537d01a27e0e0f6", size = 243520, upload-time = "2024-03-20T11:44:47.412Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f0/e5/da07b0bd832cefd52d16f2b9bbbe31624d57552602c06631686b93ccb1bd/sentry_sdk-2.29.1-py2.py3-none-any.whl", hash = "sha256:90862fe0616ded4572da6c9dadb363121a1ae49a49e21c418f0634e9d10b4c19", size = 341553, upload-time = "2025-05-19T14:27:36.882Z" },
+    { url = "https://files.pythonhosted.org/packages/26/89/9b786c95b202b2da0d3a481497e79447cff6c753b4f0af5a3aecf3271a67/sentry_sdk-1.43.0-py2.py3-none-any.whl", hash = "sha256:8d768724839ca18d7b4c7463ef7528c40b7aa2bfbf7fe554d5f9a7c044acfd36", size = 264578, upload-time = "2024-03-20T11:44:47.389Z" },
 ]
 
 [[package]]
@@ -3144,6 +3180,24 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81", size = 34031, upload-time = "2024-12-04T17:35:28.174Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274", size = 11050, upload-time = "2024-12-04T17:35:26.475Z" },
+]
+
+[[package]]
+name = "sniffio"
+version = "1.3.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a2/87/a6771e1546d97e7e041b6ae58d80074f81b7d5121207425c964ddf5cfdbd/sniffio-1.3.1.tar.gz", hash = "sha256:f4324edc670a0f49750a81b895f35c3adb843cca46f0530f79fc1babb23789dc", size = 20372, upload-time = "2024-02-25T23:20:04.057Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e9/44/75a9c9421471a6c4805dbf2356f7c181a29c1879239abab1ea2cc8f38b40/sniffio-1.3.1-py3-none-any.whl", hash = "sha256:2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2", size = 10235, upload-time = "2024-02-25T23:20:01.196Z" },
+]
+
+[[package]]
+name = "sortedcontainers"
+version = "2.4.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/e8/c4/ba2f8066cceb6f23394729afe52f3bf7adec04bf9ed2c820b39e19299111/sortedcontainers-2.4.0.tar.gz", hash = "sha256:25caa5a06cc30b6b83d11423433f65d1f9d76c4c6a0c90e3379eaa43b9bfdb88", size = 30594, upload-time = "2021-05-16T22:03:42.897Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/32/46/9cb0e58b2deb7f82b84065f37f3bffeb12413f947f9388e4cac22c4621ce/sortedcontainers-2.4.0-py2.py3-none-any.whl", hash = "sha256:a163dcaede0f1c021485e957a39245190e74249897e2ae4b2aa38595db237ee0", size = 29575, upload-time = "2021-05-16T22:03:41.177Z" },
 ]
 
 [[package]]
@@ -3331,12 +3385,12 @@ wheels = [
 
 [[package]]
 name = "tornado"
-version = "6.5.1"
+version = "6.4.2"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/51/89/c72771c81d25d53fe33e3dca61c233b665b2780f21820ba6fd2c6793c12b/tornado-6.5.1.tar.gz", hash = "sha256:84ceece391e8eb9b2b95578db65e920d2a61070260594819589609ba9bc6308c", size = 509934, upload-time = "2025-05-22T18:15:38.788Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/59/45/a0daf161f7d6f36c3ea5fc0c2de619746cc3dd4c76402e9db545bd920f63/tornado-6.4.2.tar.gz", hash = "sha256:92bad5b4746e9879fd7bf1eb21dce4e3fc5128d71601f80005afa39237ad620b", size = 501135, upload-time = "2024-11-22T03:06:38.036Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7d/f7/0c48ba992d875521ac761e6e04b0a1750f8150ae42ea26df1852d6a98942/tornado-6.5.1-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:308473f4cc5a76227157cdf904de33ac268af770b2c5f05ca6c1161d82fdd95e", size = 443252, upload-time = "2025-05-22T18:15:27.499Z" },
-    { url = "https://files.pythonhosted.org/packages/76/ff/6a0079e65b326cc222a54720a748e04a4db246870c4da54ece4577bfa702/tornado-6.5.1-cp39-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:5cae6145f4cdf5ab24744526cc0f55a17d76f02c98f4cff9daa08ae9a217448a", size = 443328, upload-time = "2025-05-22T18:15:32.426Z" },
+    { url = "https://files.pythonhosted.org/packages/22/55/b78a464de78051a30599ceb6983b01d8f732e6f69bf37b4ed07f642ac0fc/tornado-6.4.2-cp38-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:bca9eb02196e789c9cb5c3c7c0f04fb447dc2adffd95265b2c7223a8a615ccbf", size = 437173, upload-time = "2024-11-22T03:06:27.584Z" },
+    { url = "https://files.pythonhosted.org/packages/2b/ae/c1b22d4524b0e10da2f29a176fb2890386f7bd1f63aacf186444873a88a0/tornado-6.4.2-cp38-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:932d195ca9015956fa502c6b56af9eb06106140d844a335590c1ec7f5277d10c", size = 437261, upload-time = "2024-11-22T03:06:32.458Z" },
 ]
 
 [[package]]
@@ -3426,6 +3480,36 @@ easy = [
 ]
 
 [[package]]
+name = "trio"
+version = "0.33.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "attrs", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "idna", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "outcome", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "sniffio", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "sortedcontainers", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/52/b6/c744031c6f89b18b3f5f4f7338603ab381d740a7f45938c4607b2302481f/trio-0.33.0.tar.gz", hash = "sha256:a29b92b73f09d4b48ed249acd91073281a7f1063f09caba5dc70465b5c7aa970", size = 605109, upload-time = "2026-02-14T18:40:55.386Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1c/93/dab25dc87ac48da0fe0f6419e07d0bfd98799bed4e05e7b9e0f85a1a4b4b/trio-0.33.0-py3-none-any.whl", hash = "sha256:3bd5d87f781d9b0192d592aef28691f8951d6c2e41b7e1da4c25cde6c180ae9b", size = 510294, upload-time = "2026-02-14T18:40:53.313Z" },
+]
+
+[[package]]
+name = "trio-websocket"
+version = "0.12.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "outcome", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "trio", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "wsproto", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d1/3c/8b4358e81f2f2cfe71b66a267f023a91db20a817b9425dd964873796980a/trio_websocket-0.12.2.tar.gz", hash = "sha256:22c72c436f3d1e264d0910a3951934798dcc5b00ae56fc4ee079d46c7cf20fae", size = 33549, upload-time = "2025-02-25T05:16:58.947Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c7/19/eb640a397bba49ba49ef9dbe2e7e5c04202ba045b6ce2ec36e9cadc51e04/trio_websocket-0.12.2-py3-none-any.whl", hash = "sha256:df605665f1db533f4a386c94525870851096a223adcb97f72a07e8b4beba45b6", size = 21221, upload-time = "2025-02-25T05:16:57.545Z" },
+]
+
+[[package]]
 name = "triton"
 version = "3.3.0"
 source = { registry = "https://pypi.org/simple" }
@@ -3492,6 +3576,11 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/53/0c/06f8b233b8fd13b9e5ee11424ef85419ba0d8ba0b3138bf360be2ff56953/urllib3-2.7.0.tar.gz", hash = "sha256:231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c", size = 433602, upload-time = "2026-05-07T16:13:18.596Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/7f/3e/5db95bcf282c52709639744ca2a8b149baccf648e39c8cc87553df9eae0c/urllib3-2.7.0-py3-none-any.whl", hash = "sha256:9fb4c81ebbb1ce9531cce37674bbc6f1360472bc18ca9a553ede278ef7276897", size = 131087, upload-time = "2026-05-07T16:13:17.151Z" },
+]
+
+[package.optional-dependencies]
+socks = [
+    { name = "pysocks", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
 
 [[package]]
@@ -3602,6 +3691,18 @@ wheels = [
 ]
 
 [[package]]
+name = "webbot"
+version = "0.34"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "selenium", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/2c/02/1f14a3a45fb56ac1b3f1a230d8bb07746d9ee7571e7569204bbd67295ebd/webbot-0.34.tar.gz", hash = "sha256:2067bfe8eb0ab1a808072b378bc619d6f1ace1212b3ccbe2aa97d0dc2cf20ce5", size = 12908056, upload-time = "2020-10-04T01:12:43.316Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c7/72/8c59e5bd4648e953eb5bb4e60b3b1adeef86816b3cb5578b8bc9596b5730/webbot-0.34-py3-none-any.whl", hash = "sha256:1c709d570a0fb125142b8d840fb73ed02f374e727bee400fcafe915a424475f0", size = 12949890, upload-time = "2020-10-04T01:12:25.881Z" },
+]
+
+[[package]]
 name = "websockets"
 version = "12.0"
 source = { registry = "https://pypi.org/simple" }
@@ -3642,6 +3743,18 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/6e/52/2da48b35193e39ac53cfb141467d9f259851522d0e8c87153f0ba4205fb1/wrapt-1.16.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:72554a23c78a8e7aa02abbd699d129eead8b147a23c56e08d08dfc29cfdddca1", size = 80746, upload-time = "2023-11-09T06:31:58.686Z" },
     { url = "https://files.pythonhosted.org/packages/25/62/cd284b2b747f175b5a96cbd8092b32e7369edab0644c45784871528eb852/wrapt-1.16.0-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:eb6e651000a19c96f452c85132811d25e9264d836951022d6e81df2fff38337d", size = 85712, upload-time = "2023-11-09T06:32:03.686Z" },
     { url = "https://files.pythonhosted.org/packages/ff/21/abdedb4cdf6ff41ebf01a74087740a709e2edb146490e4d9beea054b0b7a/wrapt-1.16.0-py3-none-any.whl", hash = "sha256:6906c4100a8fcbf2fa735f6059214bb13b97f75b1a61777fcf6432121ef12ef1", size = 23362, upload-time = "2023-11-09T06:33:28.271Z" },
+]
+
+[[package]]
+name = "wsproto"
+version = "1.3.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "h11", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c7/79/12135bdf8b9c9367b8701c2c19a14c913c120b882d50b014ca0d38083c2c/wsproto-1.3.2.tar.gz", hash = "sha256:b86885dcf294e15204919950f666e06ffc6c7c114ca900b060d6e16293528294", size = 50116, upload-time = "2025-11-20T18:18:01.871Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a4/f5/10b68b7b1544245097b2a1b8238f66f2fc6dcaeb24ba5d917f52bd2eed4f/wsproto-1.3.2-py3-none-any.whl", hash = "sha256:61eea322cdf56e8cc904bd3ad7573359a242ba65688716b0710a5eb12beab584", size = 24405, upload-time = "2025-11-20T18:18:00.454Z" },
 ]
 
 [[package]]

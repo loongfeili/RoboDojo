@@ -58,7 +58,7 @@ Assets/                downloaded robot, object, material, and layout assets
 ## Installation and simulation smoke test
 
 RoboDojo uses [uv](https://docs.astral.sh/uv/) as its only Python package
-manager. The lock file includes Isaac Sim 5.1, the pinned IsaacLab submodule,
+manager. This experimental branch locks Isaac Sim 5.0, the pinned IsaacLab submodule,
 CuRobo, and the simulator client:
 
 ```bash
@@ -152,7 +152,7 @@ Released under the [RoboDojo Non-Commercial Research License](LICENSE). RoboDojo
 
 <p align="center">
   <img alt="Python 3.11" src="https://img.shields.io/badge/Python-3.11-475569?style=flat-square&logo=python&logoColor=white&labelColor=64748b" height="22"/>&nbsp;
-  <img alt="Isaac Sim 5.1" src="https://img.shields.io/badge/Isaac_Sim-5.1-475569?style=flat-square&logo=nvidia&logoColor=76B900&labelColor=64748b" height="22"/>&nbsp;
+  <img alt="Isaac Sim 5.0" src="https://img.shields.io/badge/Isaac_Sim-5.0-475569?style=flat-square&logo=nvidia&logoColor=76B900&labelColor=64748b" height="22"/>&nbsp;
   <img alt="Isaac Lab 2.3" src="https://img.shields.io/badge/Isaac_Lab-2.3-475569?style=flat-square&logo=nvidia&logoColor=76B900&labelColor=64748b" height="22"/>&nbsp;
   <img alt="License Non-Commercial" src="https://img.shields.io/badge/License-Non--Commercial-475569?style=flat-square&labelColor=64748b" height="22"/>
 </p>
