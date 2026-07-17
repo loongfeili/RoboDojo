@@ -3,15 +3,17 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+export OMNI_KIT_ACCEPT_EULA="${OMNI_KIT_ACCEPT_EULA:-Y}"
+export ACCEPT_EULA="${ACCEPT_EULA:-Y}"
 
 policy_dir=""
 env_cfg="arx_x5"
 task_name="stack_bowls"
 ckpt_name=""
-sim_env="RoboDojo"
+sim_env=".venv"
 policy_env=""
 skip_isaac="false"
-skip_conda="false"
+skip_environment="false"
 skip_policy="false"
 summary_path=""
 
@@ -24,11 +26,12 @@ Options:
   --env-cfg NAME        env_cfg stem to validate (default: arx_x5)
   --task NAME           Task name to validate (default: stack_bowls)
   --ckpt NAME           Optional checkpoint directory under policy checkpoints
-  --sim-env NAME        Simulator conda env for Isaac imports (default: RoboDojo)
-  --policy-env NAME     Optional policy conda env to check
+  --sim-env PATH        Simulator uv environment path (default: .venv)
+  --policy-env NAME     Optional separate policy environment
   --summary PATH        Write JSON summary to PATH
   --skip-isaac          Skip isaacsim/isaaclab import check
-  --skip-conda          Skip conda env existence checks
+  --skip-conda          Deprecated alias for --skip-environment
+  --skip-environment    Skip uv environment existence checks
   --skip-policy         Skip policy-dir/deploy/checkpoint checks
   -h, --help            Show this help
 EOF
@@ -60,7 +63,7 @@ while [[ $# -gt 0 ]]; do
     --policy-env) need_value "$@"; policy_env="$2"; shift 2 ;;
     --summary) need_value "$@"; summary_path="$2"; shift 2 ;;
     --skip-isaac) skip_isaac="true"; shift ;;
-    --skip-conda) skip_conda="true"; shift ;;
+    --skip-conda|--skip-environment) skip_environment="true"; shift ;;
     --skip-policy) skip_policy="true"; shift ;;
     -h|--help) usage; exit 0 ;;
     *)
@@ -70,6 +73,13 @@ while [[ $# -gt 0 ]]; do
       ;;
   esac
 done
+
+if ! command -v uv >/dev/null 2>&1; then
+  echo "[verify_install] uv command not found" >&2
+  exit 1
+fi
+
+UV_PYTHON=(uv run --project "${ROOT_DIR}" python)
 
 RESULTS_FILE="$(mktemp)"
 trap 'rm -f "${RESULTS_FILE}"' EXIT
@@ -124,8 +134,8 @@ else
   record "WARN" "policy checks" "skipped; pass --policy-dir to validate a policy"
 fi
 
-if python3 "${ROOT_DIR}/scripts/internal/task_inventory.py" --format json --check >/tmp/robodojo_tasks_verify.json; then
-  task_counts="$(python3 - <<'PY'
+if "${UV_PYTHON[@]}" "${ROOT_DIR}/scripts/internal/task_inventory.py" --format json --check >/tmp/robodojo_tasks_verify.json; then
+  task_counts="$("${UV_PYTHON[@]}" - <<'PY'
 import json
 with open('/tmp/robodojo_tasks_verify.json', encoding='utf-8') as f:
     payload = json.load(f)
@@ -138,7 +148,7 @@ else
 fi
 rm -f /tmp/robodojo_tasks_verify.json
 
-if python3 - <<PY; then
+if "${UV_PYTHON[@]}" - <<PY; then
 from pathlib import Path
 import sys
 import yaml
@@ -166,7 +176,7 @@ else
 fi
 
 if [[ -n "${policy_dir}" && "${skip_policy}" != "true" ]]; then
-if python3 - <<PY; then
+if "${UV_PYTHON[@]}" - <<PY; then
 from pathlib import Path
 import yaml
 
@@ -188,7 +198,7 @@ else
   record "WARN" "policy processor" "skipped; pass --policy-dir to validate"
 fi
 
-if python3 - <<PY; then
+if "${UV_PYTHON[@]}" - <<PY; then
 from env.global_configs import BENCHMARK, ROOT_DIR
 assert BENCHMARK == "RoboDojo"
 assert ROOT_DIR
@@ -198,46 +208,39 @@ else
   record "FAIL" "python import" "cannot import env.global_configs"
 fi
 
-if [[ "${skip_conda}" == "true" ]]; then
-  record "WARN" "conda envs" "skipped by --skip-conda"
-elif command -v conda >/dev/null 2>&1; then
-  envs="$(conda env list | awk 'NF && $1 !~ /^#/ {print $1}')"
-  if grep -qx "${sim_env}" <<< "${envs}"; then
-    record "PASS" "sim conda env" "${sim_env}"
-  else
-    record "FAIL" "sim conda env" "${sim_env} not found"
-  fi
-  if [[ -z "${policy_env}" ]]; then
-    record "WARN" "policy conda env" "skipped; pass --policy-env to validate"
-  elif [[ "${policy_env}" == "uv" || "${policy_env}" == */* ]]; then
-    record "WARN" "policy conda env" "policy env is path/uv; conda check skipped"
-  elif grep -qx "${policy_env}" <<< "${envs}"; then
-    record "PASS" "policy conda env" "${policy_env}"
-  else
-    record "FAIL" "policy conda env" "${policy_env} not found"
-  fi
+if [[ "${skip_environment}" == "true" ]]; then
+  record "WARN" "uv environment" "skipped by --skip-environment"
+elif [[ -x "${ROOT_DIR}/${sim_env}/bin/python" || -x "${sim_env}/bin/python" ]]; then
+  record "PASS" "sim uv environment" "${sim_env}"
 else
-  record "FAIL" "conda" "conda command not found"
+  record "FAIL" "sim uv environment" "${sim_env}/bin/python not found; run uv sync"
+fi
+
+if [[ -z "${policy_env}" ]]; then
+  record "WARN" "policy environment" "skipped; pass --policy-env to validate"
+elif [[ "${policy_env}" == "uv" || "${policy_env}" == */* ]]; then
+  record "PASS" "policy environment" "${policy_env}"
+else
+  record "WARN" "policy environment" "${policy_env} is managed separately"
 fi
 
 if [[ "${skip_isaac}" == "true" ]]; then
   record "WARN" "Isaac imports" "skipped by --skip-isaac"
-elif command -v conda >/dev/null 2>&1; then
-  if conda run -n "${sim_env}" python - <<'PY'; then
+else
+  if "${UV_PYTHON[@]}" - <<'PY'; then
 import isaacsim  # noqa: F401
 import isaaclab  # noqa: F401
+import curobo  # noqa: F401
 PY
-    record "PASS" "Isaac imports" "isaacsim and isaaclab import in ${sim_env}"
+    record "PASS" "Isaac imports" "isaacsim, isaaclab and curobo import via uv"
   else
-    record "FAIL" "Isaac imports" "isaacsim/isaaclab import failed in ${sim_env}"
+    record "FAIL" "Isaac imports" "isaacsim/isaaclab/curobo import failed via uv"
   fi
-else
-  record "FAIL" "Isaac imports" "conda unavailable; cannot check ${sim_env}"
 fi
 
 if [[ -n "${summary_path}" ]]; then
   mkdir -p "$(dirname "${summary_path}")"
-  python3 - "${RESULTS_FILE}" "${summary_path}" <<'PY'
+  "${UV_PYTHON[@]}" - "${RESULTS_FILE}" "${summary_path}" <<'PY'
 import json
 from pathlib import Path
 import sys

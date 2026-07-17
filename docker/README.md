@@ -112,9 +112,9 @@ checks the reward, and writes a valid result:
 
 Watch progress live from a second terminal with `bash docker/smoke_docker.sh monitor`.
 
-> **Note:** `smoke_docker.sh` launches the demo server **on the host** using the
-> native `RoboDojo` conda env (from `scripts/install.sh`). If you don't have the
-> native env and only want Docker, skip this step and go to
+> **Note:** `smoke_docker.sh` launches the demo server **on the host** using its
+> separately managed policy environment. The simulator image itself is installed
+> from the committed `uv.lock`. If you only want Docker, skip this step and go to
 > [step 5](#5-evaluate-your-own-policy), pointing the eval at any policy server you
 > run yourself — the demo server is only a convenience.
 
@@ -258,8 +258,5 @@ is told, via `ROBODOJO_CN_MIRRORS=1`) a China network. For a manual `docker buil
 ```bash
 docker build \
   --build-arg UBUNTU_MIRROR=mirrors.tuna.tsinghua.edu.cn \
-  --build-arg PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple \
-  --build-arg MINICONDA_URL=https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh \
-  --build-arg CONDA_CHANNEL_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/anaconda \
   -t robodojo:cuda12.8 .
 ```

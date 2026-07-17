@@ -5,6 +5,7 @@ set -euo pipefail
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 export PYTHONPATH="${PROJECT_ROOT}:${PROJECT_ROOT}/XPolicyLab:${PYTHONPATH:-}"
 echo "[INFO] PYTHONPATH=${PYTHONPATH}"
+PYTHON=(uv run --project "${PROJECT_ROOT}" --no-sync python)
 
 # Usage:
 #   bash eval_policy.sh <task_name> <env_cfg_type> <device_id> <policy_name> <port> [extra-args...]
@@ -67,6 +68,9 @@ for var_name in root_dir task_name env_cfg_type device_id policy_name port; do
 done
 
 cd "$root_dir" || exit 1
+ISAAC_EXPERIENCE="$(
+  "${PYTHON[@]}" "${PROJECT_ROOT}/scripts/internal/prepare_isaac_experience.py"
+)"
 # Config file path
 cfg_file="./env_cfg/${env_cfg_type}.yml"
 if [[ ! -f "$cfg_file" ]]; then
@@ -75,7 +79,7 @@ if [[ ! -f "$cfg_file" ]]; then
 fi
 
 # Resolve sim config file from cfg_file: env_cfg/<name>.yml -> config.sim
-sim_cfg_name="$(python3 -c "import sys,yaml;print(yaml.safe_load(open(sys.argv[1]))['config']['sim'])" "$cfg_file")"
+sim_cfg_name="$("${PYTHON[@]}" -c "import sys,yaml;print(yaml.safe_load(open(sys.argv[1]))['config']['sim'])" "$cfg_file")"
 sim_cfg_file="./env_cfg/sim/${sim_cfg_name}.yml"
 if [[ ! -f "$sim_cfg_file" ]]; then
   echo "[ERROR] Sim config file not found: $sim_cfg_file" >&2
@@ -85,7 +89,7 @@ fi
 if [[ -z "${protocol}" ]]; then
   policy_deploy_file="./XPolicyLab/policy/${policy_name}/deploy.yml"
   if [[ -f "$policy_deploy_file" ]]; then
-    protocol="$(python3 -c "import sys,yaml;print((yaml.safe_load(open(sys.argv[1])) or {}).get('protocol','ws'))" "$policy_deploy_file")"
+    protocol="$("${PYTHON[@]}" -c "import sys,yaml;print((yaml.safe_load(open(sys.argv[1])) or {}).get('protocol','ws'))" "$policy_deploy_file")"
   else
     protocol="ws"
   fi
@@ -112,13 +116,11 @@ if [[ -n "${eval_batch}" ]]; then
 fi
 
 # Read render_interval / env.num_envs from yaml (fallback if missing)
-render_interval="$(python3 -c "import sys,yaml;print(yaml.safe_load(open(sys.argv[1])).get('render_interval',1))" "$sim_cfg_file")"
-num_envs="$(python3 -c "import sys,yaml;print(yaml.safe_load(open(sys.argv[1])).get('scene',{}).get('num_envs',1))" "$sim_cfg_file")"
+render_interval="$("${PYTHON[@]}" -c "import sys,yaml;print(yaml.safe_load(open(sys.argv[1])).get('render_interval',1))" "$sim_cfg_file")"
+num_envs="$("${PYTHON[@]}" -c "import sys,yaml;print(yaml.safe_load(open(sys.argv[1])).get('scene',{}).get('num_envs',1))" "$sim_cfg_file")"
 
 echo "[INFO] render_interval = ${render_interval}"
 echo "[INFO] num_envs        = ${num_envs}"
-
-extra_args=()
 
 KIT_ENABLE_EXTS=(
   "isaacsim.replicator.behavior"
@@ -129,6 +131,12 @@ KIT_ARGS=""
 for ext in "${KIT_ENABLE_EXTS[@]}"; do
   KIT_ARGS+=" --enable ${ext}"
 done
+if [[ "${ROBODOJO_SKIP_DRIVER_CHECK:-0}" == "1" ]]; then
+  KIT_ARGS+=" --/rtx/verifyDriverVersion/enabled=false"
+fi
+if [[ -n "${ROBODOJO_KIT_ARGS:-}" ]]; then
+  KIT_ARGS+=" ${ROBODOJO_KIT_ARGS}"
+fi
 
 # Generated once per eval invocation. Carries the same identity through
 # os.execv inside main.py and bash-level retries below. Append $$ to
@@ -143,11 +151,12 @@ MAX_BASH_RETRIES="${ROBODOJO_MAX_BASH_RETRIES:-10}"
 attempt=0
 while : ; do
   set +e
-  python -u src/eval_client/main.py \
+  "${PYTHON[@]}" -u src/eval_client/main.py \
     --task_name "$task_name" \
     --env_cfg_type "$env_cfg_type" \
     --num_envs "$num_envs" \
     --enable_cameras \
+    --experience "$ISAAC_EXPERIENCE" \
     --kit_args "$KIT_ARGS" \
     --device_id "$device_id" \
     --policy_name "$policy_name" \

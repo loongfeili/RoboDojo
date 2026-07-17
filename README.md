@@ -55,6 +55,27 @@ XPolicyLab/            policy server and policy integrations
 Assets/                downloaded robot, object, material, and layout assets
 ```
 
+## Installation and simulation smoke test
+
+RoboDojo uses [uv](https://docs.astral.sh/uv/) as its only Python package
+manager. The lock file includes Isaac Sim 5.1, the pinned IsaacLab submodule,
+CuRobo, and the simulator client:
+
+```bash
+git submodule update --init --recursive
+uv sync
+
+export ROBODOJO_DATA_ROOT=/path/to/persistent/robodojo-data
+bash scripts/init_assets.sh --minimal
+bash scripts/robodojo.sh doctor --skip-policy
+bash scripts/robodojo.sh sim-smoke --enable_cameras
+```
+
+`--minimal` downloads only the `stack_bowls` seed-0 scene. Use
+`--all-assets` to download the complete simulation asset set (about 40 GB);
+policy checkpoints and training data are never included. Policy-specific
+environments remain independently managed by XPolicyLab.
+
 ## 🔌 Policy Integration
 
 Policies live in [XPolicyLab](https://github.com/XPolicyLab/XPolicyLab/blob/main/README.md), which owns policy structure, dependencies, checkpoint layout, and server behavior. RoboDojo only assumes a policy directory provides:

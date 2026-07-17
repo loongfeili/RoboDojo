@@ -21,8 +21,8 @@ if [[ $# -eq 6 ]]; then
   seed=$2
   policy_gpu_id=$3
   env_gpu_id=$4
-  policy_conda_env=$5
-  eval_env_conda_env=$6
+  policy_env=$5
+  eval_env=$6
   shift 6
 elif [[ $# -eq 7 ]]; then
   _expert_num=$1
@@ -30,8 +30,8 @@ elif [[ $# -eq 7 ]]; then
   seed=$3
   policy_gpu_id=$4
   env_gpu_id=$5
-  policy_conda_env=$6
-  eval_env_conda_env=$7
+  policy_env=$6
+  eval_env=$7
   shift 7
 else
   echo "[run_policy_eval] unexpected trailing argument count: $#" >&2
@@ -56,6 +56,24 @@ fi
 policy_server_port="$(bash "${UTILS_DIR}/get_free_port.sh")"
 policy_server_ip="localhost"
 additional_info="ckpt_name=${ckpt_name},action_type=${action_type}"
+policy_name="$(basename "${policy_dir}")"
+
+is_uv_env() {
+  local env_name="$1"
+  [[ "${env_name}" == "uv" || "${env_name}" == ".venv" || "${env_name}" == */* ]]
+}
+
+run_env_python() {
+  local env_name="$1"
+  shift
+  if [[ "${env_name}" == "uv" || "${env_name}" == ".venv" ]]; then
+    uv run --project "${ROOT_DIR}" --no-sync python "$@"
+    return
+  fi
+  local env_path="${env_name}"
+  [[ "${env_path}" = /* ]] || env_path="${ROOT_DIR}/${env_path}"
+  "${env_path}/bin/python" "$@"
+}
 
 _kill_process_tree() {
   local pid=$1
@@ -93,16 +111,33 @@ echo "[MAIN] start server, policy_server_port=${policy_server_port}"
 
 (
   cd "${policy_dir}"
-  exec bash setup_eval_policy_server.sh \
-    "${bench_name}" \
-    "${task_name}" \
-    "${ckpt_name}" \
-    "${env_cfg_type}" \
-    "${action_type}" \
-    "${seed}" \
-    "${policy_gpu_id}" \
-    "${policy_conda_env}" \
-    "${policy_server_port}"
+  if is_uv_env "${policy_env}"; then
+    export CUDA_VISIBLE_DEVICES="${policy_gpu_id}"
+    export PYTHONPATH="${ROOT_DIR}/XPolicyLab:${ROOT_DIR}:${PYTHONPATH:-}"
+    run_env_python "${policy_env}" "${ROOT_DIR}/XPolicyLab/setup_policy_server.py" \
+      --config_path "${policy_dir}/deploy.yml" \
+      --overrides \
+        port="${policy_server_port}" \
+        host="${policy_server_ip}" \
+        bench_name="${bench_name}" \
+        task_name="${task_name}" \
+        ckpt_name="${ckpt_name}" \
+        env_cfg_type="${env_cfg_type}" \
+        seed="${seed}" \
+        policy_name="${policy_name}" \
+        action_type="${action_type}"
+  else
+    exec bash setup_eval_policy_server.sh \
+      "${bench_name}" \
+      "${task_name}" \
+      "${ckpt_name}" \
+      "${env_cfg_type}" \
+      "${action_type}" \
+      "${seed}" \
+      "${policy_gpu_id}" \
+      "${policy_env}" \
+      "${policy_server_port}"
+  fi
 ) &
 
 SERVER_PID=$!
@@ -116,17 +151,31 @@ bash "${UTILS_DIR}/wait_for_policy_server.sh" \
 
 echo "[MAIN] start client, server=${policy_server_ip}:${policy_server_port}"
 
-bash "${CLIENT_SCRIPT}" \
-  "${bench_name}" \
-  "${task_name}" \
-  "${ckpt_name}" \
-  "${env_cfg_type}" \
-  "${action_type}" \
-  "${seed}" \
-  "${env_gpu_id}" \
-  "${eval_env_conda_env}" \
-  "${additional_info}" \
-  "${policy_server_port}" \
-  "${policy_server_ip}"
+if is_uv_env "${eval_env}"; then
+  bash "${ROOT_DIR}/scripts/eval_policy.sh" \
+    --root_dir "${ROOT_DIR}" \
+    --task_name "${task_name}" \
+    --env_cfg_type "${env_cfg_type}" \
+    --device_id "${env_gpu_id}" \
+    --policy_name "${policy_name}" \
+    --host "${policy_server_ip}" \
+    --port "${policy_server_port}" \
+    --protocol ws \
+    --additional_info "${additional_info}" \
+    --seed "${seed}"
+else
+  bash "${CLIENT_SCRIPT}" \
+    "${bench_name}" \
+    "${task_name}" \
+    "${ckpt_name}" \
+    "${env_cfg_type}" \
+    "${action_type}" \
+    "${seed}" \
+    "${env_gpu_id}" \
+    "${eval_env}" \
+    "${additional_info}" \
+    "${policy_server_port}" \
+    "${policy_server_ip}"
+fi
 
 echo "[MAIN] eval finished"

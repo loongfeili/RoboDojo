@@ -63,8 +63,8 @@ parser.add_argument("--seed", type=int, required=True, help="policy seed for eva
 AppLauncher.add_app_launcher_args(parser)
 args_cli = parser.parse_args()
 
-# Safe to import before AppLauncher: env is a namespace package (no __init__)
-# and GLOBAL_CONFIGS only imports os, so this pulls in no app-dependent code.
+# Safe to import before AppLauncher: env.__init__ is intentionally lightweight
+# and global_configs only imports os, so this pulls in no app-dependent code.
 from env.global_configs import BENCHMARK, ROOT_DIR
 
 task_registry = importlib.import_module(f"task.{BENCHMARK}.task_registry")

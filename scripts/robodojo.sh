@@ -10,6 +10,7 @@ Usage: bash scripts/robodojo.sh <command> [options]
 
 Commands:
   doctor      Check RoboDojo assets/configs/env before launching evaluation
+  sim-smoke   Launch one headless scene and verify physics plus RGB cameras
   eval        Run one RoboDojo task through an XPolicyLab policy eval.sh (server + client on localhost)
   server      Start only the policy server (for split / multi-machine eval)
   client      Run only the sim client against an already-running policy server
@@ -73,7 +74,22 @@ run_doctor() {
 }
 
 run_tasks() {
-  python3 "${ROOT_DIR}/scripts/internal/task_inventory.py" "$@"
+  uv run --project "${ROOT_DIR}" python "${ROOT_DIR}/scripts/internal/task_inventory.py" "$@"
+}
+
+run_sim_smoke() {
+  export OMNI_KIT_ACCEPT_EULA="${OMNI_KIT_ACCEPT_EULA:-Y}"
+  export OMNI_KIT_ALLOW_ROOT="${OMNI_KIT_ALLOW_ROOT:-1}"
+  local experience
+  experience="$(
+    uv run --project "${ROOT_DIR}" --no-sync python \
+      "${ROOT_DIR}/scripts/internal/prepare_isaac_experience.py"
+  )"
+  set -- "$@" --experience "${experience}"
+  if [[ "${ROBODOJO_SKIP_DRIVER_CHECK:-0}" == "1" ]]; then
+    set -- "$@" "--kit_args=--/rtx/verifyDriverVersion/enabled=false"
+  fi
+  uv run --project "${ROOT_DIR}" python "${ROOT_DIR}/scripts/internal/sim_smoke.py" "$@"
 }
 
 run_eval() {
@@ -87,7 +103,7 @@ run_eval() {
   local policy_gpu="0"
   local env_gpu="0"
   local policy_env=""
-  local eval_env="RoboDojo"
+  local eval_env=".venv"
   local policy_dir=""
   local eval_num="${EVAL_NUM:-}"
   local dry_run="false"
@@ -116,7 +132,7 @@ Required:
   --policy-dir PATH     XPolicyLab policy directory containing eval.sh
   --task TASK           RoboDojo task name
   --ckpt CKPT           Policy checkpoint name
-  --policy-env ENV      Policy conda env, uv, or env path
+  --policy-env ENV      Separate policy environment (conda, uv, or path)
 
 Common options:
   --eval-num NUM|native  Override EVAL_NUM for this eval; use `native` for per-task counts from _task.yml
@@ -126,7 +142,7 @@ Common options:
   --seed NUM            Eval seed / layout seed (default: 0)
   --policy-gpu ID       Policy server GPU (default: 0)
   --env-gpu ID          Isaac Sim GPU (default: 0)
-  --eval-env ENV        Simulator conda env (default: RoboDojo)
+  --eval-env ENV        Simulator uv environment path (default: .venv)
   --dry-run             Print command without running it
 
 Split / multi-machine: use `robodojo.sh server` + `robodojo.sh client` (see docs/SPLIT_EVAL.md).
@@ -449,7 +465,7 @@ run_sweep() {
 }
 
 run_summarize() {
-  python3 "${ROOT_DIR}/scripts/internal/summarize_result.py" "$@"
+  uv run --project "${ROOT_DIR}" python "${ROOT_DIR}/scripts/internal/summarize_result.py" "$@"
 }
 
 if [[ $# -lt 1 ]]; then
@@ -462,6 +478,7 @@ shift
 
 case "${command}" in
   doctor) run_doctor "$@" ;;
+  sim-smoke) run_sim_smoke "$@" ;;
   tasks) run_tasks "$@" ;;
   eval) run_eval "$@" ;;
   server) run_server "$@" ;;

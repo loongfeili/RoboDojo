@@ -3,6 +3,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+PYTHON=(uv run --project "${ROOT_DIR}" --no-sync python)
 
 dataset="RoboDojo"
 ckpt=""
@@ -13,7 +14,7 @@ seed="0"
 policy_gpu="0"
 env_gpu="0"
 policy_env=""
-eval_env="RoboDojo"
+eval_env=".venv"
 eval_num="1"
 policy_dir=""
 run_id="$(date +%Y-%m-%d_%H-%M-%S)_smoke"
@@ -134,7 +135,7 @@ RESULTS_TSV="$(mktemp)"
 trap 'rm -f "${RESULTS_TSV}"' EXIT
 
 if [[ "${resume}" == "true" && -f "${summary_path}" ]]; then
-  python3 - "${summary_path}" "${RESULTS_TSV}" <<'PY'
+  "${PYTHON[@]}" - "${summary_path}" "${RESULTS_TSV}" <<'PY'
 import csv
 import json
 from pathlib import Path
@@ -151,7 +152,7 @@ PY
 fi
 
 load_tasks() {
-  python3 - "${ROOT_DIR}" "${only_tasks}" "${tasks_file}" "${limit}" <<'PY'
+  "${PYTHON[@]}" - "${ROOT_DIR}" "${only_tasks}" "${tasks_file}" "${limit}" <<'PY'
 from pathlib import Path
 import sys
 
@@ -192,7 +193,7 @@ PY
 passed_in_summary() {
   local task="$1"
   [[ -f "${summary_path}" ]] || return 1
-  python3 - "${summary_path}" "${task}" <<'PY'
+  "${PYTHON[@]}" - "${summary_path}" "${task}" <<'PY'
 import json
 from pathlib import Path
 import sys
@@ -207,7 +208,7 @@ PY
 }
 
 write_summaries() {
-  python3 - "${RESULTS_TSV}" "${summary_path}" "${markdown_path}" "${run_id}" "${eval_num}" <<'PY'
+  "${PYTHON[@]}" - "${RESULTS_TSV}" "${summary_path}" "${markdown_path}" "${run_id}" "${eval_num}" <<'PY'
 import csv
 import json
 from pathlib import Path
@@ -327,7 +328,7 @@ for task in "${TASKS[@]}"; do
   eval_time="-"
   message=""
   if [[ -f "${result_path}" ]]; then
-    eval_time="$(python3 - "${result_path}" <<'PY'
+    eval_time="$("${PYTHON[@]}" - "${result_path}" <<'PY'
 import json
 from pathlib import Path
 import sys
@@ -355,7 +356,7 @@ PY
 done
 
 write_summaries
-fail_count="$(python3 - "${summary_path}" <<'PY'
+fail_count="$("${PYTHON[@]}" - "${summary_path}" <<'PY'
 import json
 from pathlib import Path
 import sys

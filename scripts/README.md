@@ -4,12 +4,22 @@
 
 | Script | Purpose |
 | --- | --- |
-| [robodojo.sh](robodojo.sh) | Main CLI: `doctor`, `eval`, `client`, `smoke`, `benchmark`, `summarize`, `tasks` |
-| [install.sh](install.sh) | One-time environment setup (conda, Isaac Sim, submodules) |
-| [init_assets.sh](init_assets.sh) | Download robot/object assets |
+| [robodojo.sh](robodojo.sh) | Main CLI: `doctor`, `sim-smoke`, `eval`, `client`, `smoke`, `benchmark`, `summarize`, `tasks` |
+| [install.sh](install.sh) | Validate system tools, initialize submodules, and run `uv sync` |
+| [init_assets.sh](init_assets.sh) | Download minimal or full simulation assets to persistent storage |
+| [persist_uv_env.sh](persist_uv_env.sh) | Save/restore `.venv` and uv cache archives for ephemeral containers |
 | [eval_policy.sh](eval_policy.sh) | Isaac Sim eval client (called by `robodojo.sh client` and XPolicyLab) |
 
 ## Typical eval flow
+
+Install the Python environment declaratively; do not use `pip` or `uv pip`:
+
+```bash
+uv sync
+export ROBODOJO_DATA_ROOT=/path/to/persistent/robodojo-data
+bash scripts/init_assets.sh --minimal
+bash scripts/robodojo.sh sim-smoke --enable_cameras
+```
 
 ```text
 robodojo.sh eval
