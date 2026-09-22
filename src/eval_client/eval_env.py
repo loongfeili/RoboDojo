@@ -191,6 +191,8 @@ def create_eval_env(config, app, resume_state=None, **kwargs):
                 trial_id=trial_id,
                 action_case_id=action_case_id,
                 repeat_index=self.deploy_cfg.get("repeat_index"),
+                ws_ping_interval_s=self.deploy_cfg.get("ws_ping_interval_s", 20.0),
+                ws_ping_timeout_s=self.deploy_cfg.get("ws_ping_timeout_s", 20.0),
             )
             self.robot_action_dim_info = get_robot_action_dim_info(env_cfg=self.eval_cfg)
 
@@ -256,7 +258,7 @@ def create_eval_env(config, app, resume_state=None, **kwargs):
             for idx in range(200):
                 self.sim_step()
                 if idx % 5 == 0:
-                    self.render()
+                    self.obs_manager.render_for_capture()
                     self.obs_manager.get_obs()
             if self.physx_monitor_enabled:
                 self._check_physx_broken_envs()
@@ -267,11 +269,11 @@ def create_eval_env(config, app, resume_state=None, **kwargs):
         def get_obs_batch(self, env_idx_list=None, last_frame=False):
             if self.physx_monitor_enabled:
                 self._check_physx_broken_envs()
-            self.render()
             if env_idx_list is None:
                 env_idx_list = list(range(self.num_envs))
             if self.physx_monitor_enabled:
                 self._check_endpose_finite(env_idx_list)
+            self.obs_manager.render_for_capture()
             data = self.obs_manager.get_obs(env_idx_list=env_idx_list)
             data_list = []
             for env_idx in env_idx_list:

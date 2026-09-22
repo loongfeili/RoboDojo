@@ -35,6 +35,11 @@ class ObsManager:
         )
         self.robot_cfg = obs_config.get("robot", {})
         self.collect_freq = self.obs_config.get("collect_freq", 0)
+        # Frames the SDG dispatcher must deliver after the physics step before
+        # images are read. One is exact with the zero-delay Kit settings that
+        # the entrypoints enable; render_sync adds one more if they are absent.
+        self.capture_render_passes = int(self.obs_config.get("capture_render_passes", 1))
+        self.capture_render_max_passes = int(self.obs_config.get("capture_render_max_passes", 16))
         if self.collect_freq > 0:
             self.collect_interval = 1.0 / (self.dt * self.collect_freq)
         else:
@@ -72,6 +77,20 @@ class ObsManager:
     def reset(self):
         self.desc_manager.reset()
         self.instruction = self.desc_manager.get_one_description()
+
+    def render_for_capture(self):
+        """Render until the camera buffers hold the current physics state.
+
+        Call this instead of a bare ``env.render()`` right before ``get_obs``.
+        """
+        from env.camera_manager.capture.render_sync import wait_for_latest_cameras
+
+        wait_for_latest_cameras(
+            self.env,
+            capture_manager=self.capture_manager,
+            min_passes=self.capture_render_passes,
+            max_passes=self.capture_render_max_passes,
+        )
 
     def get_obs(self, env_idx_list=None):  # batch
         if env_idx_list is None:

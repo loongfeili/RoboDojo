@@ -10,6 +10,14 @@
 
 https://private-user-images.githubusercontent.com/88101805/619409345-cc074c5d-4567-4418-8a29-1385aaba9d5b.mp4
 
+## News
+
+- **September 16–17, 2026**
+  - Fixed a single-frame discrepancy in `get_obs` and updated both the code and Hugging Face data. Rerunning evaluations across multiple models showed that the experimental results remain essentially unchanged.
+  - Together with RoboTwin, fixed the channel ordering of the RGB data byte stream to keep both projects consistent. Please use this update with XPolicyLab commit [`bb9a0b5`](https://github.com/XPolicyLab/XPolicyLab/commit/bb9a0b5f5136a74503b679af830bfd0a3a837d5c) or later.
+  - Updated the simulation assets for the `swap_T` task to make the objects less prone to slipping.
+- **July 6, 2026** — Released the [RoboDojo paper](https://arxiv.org/abs/2607.04434) and open-sourced the code.
+
 ## ✨ Highlights
 
 <p align="center">
@@ -36,9 +44,9 @@ The [RoboDojo documentation](https://robodojo-benchmark.com/doc/) is the canonic
 | :-- | :-- |
 | [Usage Overview](https://robodojo-benchmark.com/doc/usage/) | End-to-end walkthrough of the evaluation workflow. |
 | [Installation & Downloading (Assets and Data)](https://robodojo-benchmark.com/doc/usage/install-and-download/) | Environment setup and downloading robot/object/layout assets/training data. |
-| [Quick Evaluation](https://robodojo-benchmark.com/doc/usage/evaluation/) | Quickly dispatch XPolicyLab to run a policy for testing. |
-| [XPolicyLab](https://robodojo-benchmark.com/doc/usage/XPolicyLab/) | Integrates a large collection of policies and defines how to integrate new ones. |
-| [Simulation Tasks Details](https://robodojo-benchmark.com/doc/tasks/) | The 42 Isaac Sim tasks across five capability dimensions. |
+| [Quick Evaluation](https://robodojo-benchmark.com/doc/usage/quick-evaluation/) | Quickly dispatch XPolicyLab to run a policy for testing. |
+| [XPolicyLab](https://robodojo-benchmark.com/doc/usage/xpolicylab/) | Integrates a large collection of policies and defines how to integrate new ones. |
+| [Simulation Tasks Details](https://robodojo-benchmark.com/doc/sim-tasks/) | The 42 Isaac Sim tasks across five capability dimensions. |
 | [Real Robot Tasks Details](https://robodojo-benchmark.com/doc/real-tasks/) | The 18 real-world tasks on Piper X, Piper, and ARX X5. |
 | [Configurations](https://robodojo-benchmark.com/doc/usage/configurations/) | Simulator, scene, robot, and camera configuration options. |
 | [Common Issues](https://robodojo-benchmark.com/doc/common-issue/) | Troubleshooting for installation, assets, GPU memory, and evaluation. |
@@ -112,7 +120,7 @@ View live rankings on the [RoboDojo Leaderboard](https://robodojo-benchmark.com/
 
 ```bibtex
 @article{chen2026robodojo,
-  title={RoboDojo: A Unified Sim-and-Real Benchmark for Comprehensive Evaluation of Generalist Robot Manipulation Policies},
+  title={{RoboDojo}: A Unified Sim-and-Real Benchmark for Comprehensive Evaluation of Generalist Robot Manipulation Policies},
   author={Chen, Tianxing and Chen, Yue and Li, Zixuan and Tang, Junyuan and Su, Kailun and Wan, Weijie and Chen, Baijun and Lu, Haoran and Yan, Haowen and Su, Honghao and others},
   journal={arXiv preprint arXiv:2607.04434},
   year={2026}

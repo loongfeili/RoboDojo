@@ -120,6 +120,11 @@ if enable_monitor:
 
     get_monitor().start(enabled=True)
 
+# Camera frames must not lag physics: make each Kit update wait for its frame.
+from env.camera_manager.capture.render_sync import add_zero_delay_kit_args
+
+add_zero_delay_kit_args(args_cli)
+
 # launch omniverse app
 app_launcher = AppLauncher(args_cli)
 simulation_app = app_launcher.app

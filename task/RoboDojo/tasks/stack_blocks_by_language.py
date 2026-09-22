@@ -51,7 +51,7 @@ class StackBlocksByLanguageCommon:
         cat_index = [cat_index[0][env_idx], cat_index[1][env_idx], cat_index[2][env_idx]]
         color = {"1": "blue", "2": "green", "3": "red", "7": "yellow", "8": "orange", "9": "cyan"}
         templates = [
-            f"stack the blocks from bottom to top in the order of{color[str(cat_index[0])]}, {color[str(cat_index[1])]}, and {color[str(cat_index[2])]}, then reset the robot arm."
+            f"stack the blocks from bottom to top in the order of {color[str(cat_index[0])]}, {color[str(cat_index[1])]}, and {color[str(cat_index[2])]}, then reset the robot arm."
         ]
         return templates
 
